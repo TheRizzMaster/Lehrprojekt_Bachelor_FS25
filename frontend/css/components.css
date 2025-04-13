@@ -1,0 +1,38 @@
+/*header.html*/
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+header img {
+    height: 60px;
+}
+
+nav ul{
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+nav ul li{
+    display: inline;
+}
+nav ul li a{
+    text-decoration: none;
+    color: var(--color-primary);
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+nav ul li a:hover{
+    background-color: var(--color-light);
+    color: #000;
+}
+

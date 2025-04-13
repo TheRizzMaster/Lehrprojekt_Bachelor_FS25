@@ -1,0 +1,164 @@
+/* ========== Grundlayout ========== */
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to bottom right, #f5f7fa, #c3cfe2);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  header {
+    padding: 1rem 2rem;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+  
+  header img {
+    height: 40px;
+  }
+  
+  /* ========== Main Layout ========== */
+  main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+  }
+
+  /* ========== Formular-Container ========== */
+  #forms-container {
+    width: 100%;
+    max-width: 400px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+  
+  /* ========== Tabs ========== */
+  .tabs {
+    display: flex;
+    justify-content: center;
+    background-color: #f7f9fb;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .tabs button {
+    flex: 1;
+    background-color: transparent;
+    border: none;
+    padding: 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s ease;
+    color: #555;
+  }
+  
+  .tabs button:hover,
+  .tabs button.active {
+    border-bottom: 3px solid #0077ff;
+    color: #0077ff;
+    font-weight: bold;
+  }
+  
+  /* ========== Formularbereiche ========== */
+  .form-container {
+    display: none;
+    padding: 2rem;
+  }
+  
+  .form-container.active {
+    display: block;
+  }
+  
+  form h1 {
+    margin-top: 0;
+    font-size: 1.5rem;
+    color: #333;
+  }
+  
+  form div {
+    margin-bottom: 1.2rem;
+  }
+  
+  label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #444;
+  }
+  
+  input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+  }
+  
+  input:focus {
+    outline: none;
+    border-color: #0077ff;
+  }
+  
+  /* ========== Submit-Button ========== */
+  button[type="submit"] {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #0077ff;
+    color: white;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #005fcc;
+  }
+  
+  /* ========== Links & Hinweise ========== */
+  form p {
+    font-size: 0.9rem;
+    color: #555;
+    margin-top: 1rem;
+  }
+  
+  form a {
+    color: #0077ff;
+    text-decoration: none;
+  }
+  
+  form a:hover {
+    text-decoration: underline;
+  }
+
+  .input-icon {
+    position: relative;
+    width: 100%;
+  }
+  
+  .input-icon i {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    transform: translateY(-50%);
+    color: #888;
+    font-size: 1rem;
+  }
+  
+  .input-icon input {
+    padding-left: 2.5rem; /* Platz fürs Icon */
+  }
+
+  .input-icon input,
+button[type="submit"] {
+  box-sizing: border-box;
+  width: 100%;
+}
