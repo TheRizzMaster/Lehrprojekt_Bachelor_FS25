@@ -13,4 +13,13 @@ function showForm(id) {
     } else {
       buttons[1].classList.add('active');
     }
-  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.has("register")) {
+      showForm("register-form");
+    } else {
+      showForm("login-form");
+    }
+});

@@ -1,6 +1,49 @@
 body {
     background-color: #f0f0f0;
-    font-family: Arial, sans-serif;
+    font-family: 'Inter', sans-serif;
     margin: 0;
     padding: 0;
+}
+
+main {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 90vh;
+}
+
+main h1 {
+    font-size: 2.5rem;
+    color: #000;
+    margin-bottom: 20px;
+}
+
+main p {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 40px;
+
+}
+
+main button {
+    background-color: #4318D1;
+    color: white;
+    border: none;
+    padding: 15px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 200px;
+    margin: 0 auto;
+}
+
+main button:hover {
+    background-color: #3a16b8;
+}
+
+#hero {
+    width: 80vw;
+    max-width: 550px;
+    margin: 0 auto;
 }
