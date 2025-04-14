@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="de-CH">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feedback Formular</title>
+    <link rel="stylesheet" href="./css/global.css">
+    <link rel="stylesheet" href="./css/feedback.css">
+</head>
+<body>
+
+
+    <div class="container">
+        <button class="back-button">Zurück</button>
+    
+        <h1>Wie schätzt du dein Lernverhalten ein?</h1>
+        <p class="subtitle">Bitte bewerte dein Verhalten auf einer Skala von 1 bis 6</p>
+    
+        <form class="card">
+          <!-- Frage 1 -->
+          <div class="question">
+            <label for="q1">Ich habe mich beim Bearbeiten der Lektionen konzentriert.</label>
+            <div class="slider-wrapper">
+              <div class="slider-labels-top">
+                <span>I</span><span>I</span><span>I</span><span>I</span><span>I</span><span>I</span>
+              </div>
+              <input type="range" min="1" max="6" step="1" id="q1" name="q1" value="1"/>
+              <div class="scale-texts">
+                <span>Stimme nicht zu</span>
+                <span>Stimme zu</span>
+              </div>
+            </div>
+          </div>
+    
+          <!-- Frage 2 -->
+          <div class="question">
+            <label for="q2">Ich habe mir Zeit genommen, die Inhalte wirklich zu verstehen.</label>
+            <div class="slider-wrapper">
+              <div class="slider-labels-top">
+                <span>I</span><span>I</span><span>I</span><span>I</span><span>I</span><span>I</span>
+              </div>
+              <input type="range" min="1" max="6" step="1" id="q2" name="q2" value="1"/>
+              <div class="scale-texts">
+                <span>Stimme nicht zu</span>
+                <span>Stimme zu</span>
+              </div>
+            </div>
+          </div>
+    
+          <!-- Frage 3 -->
+          <div class="question">
+            <label for="q3">Ich habe versucht, die Inhalte auf andere Situationen zu übertragen.</label>
+            <div class="slider-wrapper">
+              <div class="slider-labels-top">
+                <span>I</span><span>I</span><span>I</span><span>I</span><span>I</span><span>I</span>
+              </div>
+              <input type="range" min="1" max="6" step="1" id="q3" name="q3" value="1"/>
+              <div class="scale-texts">
+                <span>Stimme nicht zu</span>
+                <span>Stimme zu</span>
+              </div>
+            </div>
+          </div>
+    
+          <!-- Frage 4 -->
+          <div class="question">
+            <label for="q4">Ich habe mich mit den Aufgaben aktiv auseinandergesetzt.</label>
+            <div class="slider-wrapper">
+              <div class="slider-labels-top">
+                <span>I</span><span>I</span><span>I</span><span>I</span><span>I</span><span>I</span>
+              </div>
+              <input type="range" min="1" max="6" step="1" id="q4" name="q4" value="1"/>
+              <div class="scale-texts">
+                <span>Stimme nicht zu</span>
+                <span>Stimme zu</span>
+              </div>
+            </div>
+          </div>
+    
+          <!-- Frage 5 -->
+          <div class="question">
+            <label for="q5">Ich kann mir das Gelernte gut merken.</label>
+            <div class="slider-wrapper">
+              <div class="slider-labels-top">
+                <span>I</span><span>I</span><span>I</span><span>I</span><span>I</span><span>I</span>
+              </div>
+              <input type="range" min="1" max="6" step="1" id="q5" name="q5" value="1"/>
+              <div class="scale-texts">
+                <span>Stimme nicht zu</span>
+                <span>Stimme zu</span>
+              </div>
+            </div>
+          </div>
+    
+          <button type="submit" class="submit-button">Feedback einreichen</button>
+        </form>
+      </div>
+
+    <script src="./js/feedback.js"></script>
+
+</body>
+</html>

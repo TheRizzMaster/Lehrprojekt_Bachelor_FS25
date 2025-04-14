@@ -10,3 +10,7 @@
     --color-light: #f8f9fa;
     --color-dark: #343a40;
 }
+
+* {
+    font-family: 'Inter', sans-serif;
+}

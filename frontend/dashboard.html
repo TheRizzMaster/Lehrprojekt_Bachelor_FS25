@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="de-CH">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Coach | Dashboard</title>
+
+    <link rel="stylesheet" href="./css/global.css">
+    <link rel="stylesheet" href="./css/dashboard.css">
+</head>
+<body>
+    <header>
+        <div>
+            <h1>Deine Lernreise</h1>
+            <p>Verfolge deinen Fortschritt</p>
+        </div>
+        <button onclick="logout()" id="logout_btn">Logout</button>
+    </header>
+
+    <main>
+        <div id="grid-container">
+            <!-- Modul 1 -->
+            <div class="grid-item done">
+              <h3>Einführung in das Denken in Strukturen</h3>
+              <p class="status">Fertig</p>
+              <div class="progress-bar green">
+                <div class="fill" style="width: 100%"></div>
+              </div>
+              <p class="percent">100% Abgeschlossen</p>
+              <button class="action-btn ghost">Modul ansehen</button>
+            </div>
+          
+            <!-- Modul 2 -->
+            <div class="grid-item in-progress">
+              <h3>Wiederholung & Muster</h3>
+              <p class="status">In Bearbeitung</p>
+              <div class="progress-bar blue">
+                <div class="fill" style="width: 40%"></div>
+              </div>
+              <p class="percent">40% Abgeschlossen</p>
+              <button class="action-btn primary">Fortsetzen</button>
+            </div>
+          
+            <!-- Modul 3 -->
+            <div class="grid-item locked">
+              <h3>Strukturierte Systeme & Daten</h3>
+              <p class="status">Schliesse das vorherige Modul zuerst ab</p>
+              <div class="progress-bar grey">
+                <div class="fill" style="width: 0%"></div>
+              </div>
+              <p class="percent">0% Abgeschlossen</p>
+              <div class="lock-icon">🔒</div>
+            </div>
+          
+            <!-- Modul 4 -->
+            <div class="grid-item locked">
+              <h3>Problemlösungsstrategien & Transfer</h3>
+              <p class="status">Schliesse das vorherige Modul zuerst ab</p>
+              <div class="progress-bar grey">
+                <div class="fill" style="width: 0%"></div>
+              </div>
+              <p class="percent">0% Abgeschlossen</p>
+              <div class="lock-icon">🔒</div>
+            </div>
+          
+            <!-- Modul 5 -->
+            <div class="grid-item locked">
+              <h3>Algorithmen & Logik</h3>
+              <p class="status">Schliesse das vorherige Modul zuerst ab</p>
+              <div class="progress-bar grey">
+                <div class="fill" style="width: 0%"></div>
+              </div>
+              <p class="percent">0% Abgeschlossen</p>
+              <div class="lock-icon">🔒</div>
+            </div>
+          
+            <!-- Modul 6 -->
+            <div class="grid-item locked">
+              <h3>Datenstrukturen verstehen</h3>
+              <p class="status">Schliesse das vorherige Modul zuerst ab</p>
+              <div class="progress-bar grey">
+                <div class="fill" style="width: 0%"></div>
+              </div>
+              <p class="percent">0% Abgeschlossen</p>
+              <div class="lock-icon">🔒</div>
+            </div>
+          
+            <!-- Modul 7 -->
+            <div class="grid-item locked">
+              <h3>Objektorientierung & Konzepte</h3>
+              <p class="status">Schliesse das vorherige Modul zuerst ab</p>
+              <div class="progress-bar grey">
+                <div class="fill" style="width: 0%"></div>
+              </div>
+              <p class="percent">0% Abgeschlossen</p>
+              <div class="lock-icon">🔒</div>
+            </div>
+          
+            <!-- Modul 8 -->
+            <div class="grid-item locked">
+              <h3>Abschlussprojekt & Anwendung</h3>
+              <p class="status">Schliesse das vorherige Modul zuerst ab</p>
+              <div class="progress-bar grey">
+                <div class="fill" style="width: 0%"></div>
+              </div>
+              <p class="percent">0% Abgeschlossen</p>
+              <div class="lock-icon">🔒</div>
+            </div>
+          </div>
+    </main>
+
+    <footer>
+        <p>&copy;<span id="copyright_year">2024</span> AI-Coach. Alle Rechte vorbehalten.</p>
+    </footer>
+
+    <script src="./js/dashboard.js"></script>
+    <script src="./js/global.js"></script>
+    
+</body>
+</html>

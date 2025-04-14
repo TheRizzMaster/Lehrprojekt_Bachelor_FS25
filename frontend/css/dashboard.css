@@ -1,0 +1,141 @@
+
+body {
+    min-height: 100vh;
+    margin: 0;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+}
+
+header h1 {
+    font-size: 32px;
+    color: #1E293B;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+header p {
+    color: #64748B;
+    font-size: 16px;
+    margin: 0;
+}
+
+#logout_btn {
+    background-color: #4318D1;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 120px;
+}
+
+#logout_btn:hover {
+    background-color: #ffffff;
+    color: #4318D1;
+}
+
+footer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+main {
+    min-height: 80vh;
+}
+
+
+/* ========== Grid Layout ========== */
+
+#grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  
+  .grid-item {
+    background: white;
+    border-radius: 12px;
+    border: #e2e8f0ba solid 1px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    position: relative;
+  }
+  
+  .grid-item h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.25rem;
+    color: #1a202c;
+  }
+  
+  .grid-item .status {
+    color: #718096;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+  
+  .progress-bar {
+    background: #e2e8f0;
+    border-radius: 999px;
+    height: 8px;
+    margin-bottom: 0.5rem;
+    overflow: hidden;
+  }
+  
+  .progress-bar .fill {
+    height: 100%;
+    border-radius: 999px;
+    transition: width 0.4s ease;
+  }
+  
+  .progress-bar.green .fill { background-color: #38a169; }
+  .progress-bar.blue .fill { background-color: #3182ce; }
+  .progress-bar.grey .fill { background-color: #cbd5e0; }
+  
+  .percent {
+    font-size: 0.85rem;
+    color: #4a5568;
+    margin-bottom: 1rem;
+  }
+  
+  .action-btn {
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    border: none;
+    cursor: pointer;
+    transition: 0.2s ease;
+  }
+  
+  .action-btn.primary {
+    background-color: #3182ce;
+    color: white;
+  }
+  
+  .action-btn.ghost {
+    background-color: #edf2f7;
+    color: #4a5568;
+  }
+  
+  .action-btn.primary:hover {
+    background-color: #2b6cb0;
+  }
+  
+  .lock-icon {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    font-size: 1.2rem;
+    color: #a0aec0;
+  }
