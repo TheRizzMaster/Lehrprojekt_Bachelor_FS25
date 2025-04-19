@@ -1,3 +1,10 @@
 config.php
-database.php
+bootstrap.php
+composer.lock
+composer.json
+
 .vscode/
+
+.env
+
+/vendor/

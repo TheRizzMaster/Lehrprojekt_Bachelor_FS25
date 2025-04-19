@@ -1,0 +1,27 @@
+{
+    "meta": {
+        "exercise_id": "ABC-123-UBG",
+        "exercise": "Dekomposition für Anfänger",
+        "Module": "Dekomposition"
+    },
+    "theory": [
+        {
+            "kapitel": "Von Anfang an",
+            "content": "Lorem Ipsum..."
+        },
+        {
+            "kapitel": "Medium ist Medium",
+            "content": "Lorem Ipsum..."
+        },
+        {
+            "kapitel": "Das beste kommt zum Schluss",
+            "content": "Lorem Ipsum..."
+        }
+        
+    ],
+    "exercises": [
+        {},
+        {},
+        {}
+    ]
+}
