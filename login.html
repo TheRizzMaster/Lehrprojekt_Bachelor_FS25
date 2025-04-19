@@ -36,6 +36,7 @@
               <i class="fa-solid fa-lock"></i>
               <input type="password" id="log_password" name="log_password" placeholder="Passwort" required />
             </div>
+            <p id="log_error" style="display: none; color: red;"></p>
             <button type="submit">Anmelden</button>
             <p>Kein Konto? <a href="#" onclick="showForm('register-form')">Hier registrieren</a></p>
             <p>Passwort vergessen? <a href="./reset_password.html">Hier zurücksetzen</a></p>
@@ -53,7 +54,7 @@
                 <i class="fa-solid fa-user-plus"></i>
                 <input type="text" id="new-username" name="new-username" placeholder="Benutzername" required />
               </div>
-              
+
               <div class="input-icon">
                 <i class="fa-solid fa-envelope"></i>
                 <input type="email" id="email" name="email" placeholder="E-Mail" required />
@@ -63,6 +64,8 @@
                 <i class="fa-solid fa-lock"></i>
                 <input type="password" id="new-password" name="new-password" placeholder="Passwort" required />
               </div>
+
+              <p id="reg_error" style="display: none; color: red;"></p>
 
               <button type="submit">Registrieren</button>
               <p>Bereits ein Konto? <a href="#" onclick="showForm('login-form')">Hier anmelden</a></p>
