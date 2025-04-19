@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
         registerForm.reset();
         showForm("login-form");
       } else {
-        alert(data.error || "Fehler bei der Registrierung");
+        alert(data.message || "Fehler bei der Registrierung");
       }
     } catch (err) {
       console.error(err);
