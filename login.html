@@ -22,15 +22,19 @@
         </div>
   
         <div id="login-form" class="form-container active">
-          <form action="">
+          <form id="loginForm">
             <h1>Anmeldung</h1>
+          
+            <!-- Honeypot -->
+            <input type="text" name="confirm_email" style="display:none" tabindex="-1" autocomplete="off" />
+          
             <div class="input-icon">
-            <i class="fa-solid fa-user"></i>
-            <input type="text" id="log_username" name="log_username" placeholder="Benutzername" required />
+              <i class="fa-solid fa-user"></i>
+              <input type="email" id="log_email" name="log_email" placeholder="E-Mail" required />
             </div>
             <div class="input-icon">
-            <i class="fa-solid fa-lock"></i>
-            <input type="password" id="log_password" name="log_password" placeholder="Passwort" required />
+              <i class="fa-solid fa-lock"></i>
+              <input type="password" id="log_password" name="log_password" placeholder="Passwort" required />
             </div>
             <button type="submit">Anmelden</button>
             <p>Kein Konto? <a href="#" onclick="showForm('register-form')">Hier registrieren</a></p>
@@ -39,24 +43,27 @@
         </div>
   
         <div id="register-form" class="form-container">
-            <form action="">
+          <form id="registerForm">
               <h1>Registrierung</h1>
-          
+            
+              <!-- Honeypot -->
+              <input type="text" name="confirm_email" style="display:none" tabindex="-1" autocomplete="off" />
+            
               <div class="input-icon">
                 <i class="fa-solid fa-user-plus"></i>
                 <input type="text" id="new-username" name="new-username" placeholder="Benutzername" required />
               </div>
-          
+              
               <div class="input-icon">
                 <i class="fa-solid fa-envelope"></i>
                 <input type="email" id="email" name="email" placeholder="E-Mail" required />
               </div>
-          
+
               <div class="input-icon">
                 <i class="fa-solid fa-lock"></i>
                 <input type="password" id="new-password" name="new-password" placeholder="Passwort" required />
               </div>
-          
+
               <button type="submit">Registrieren</button>
               <p>Bereits ein Konto? <a href="#" onclick="showForm('login-form')">Hier anmelden</a></p>
             </form>
