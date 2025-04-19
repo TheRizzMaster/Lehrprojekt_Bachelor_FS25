@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="de-CH">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Coach | Neues Passwort</title>
+</head>
+<body>
+    <h1>Neues Passwort setzen</h1>
+    <form id="resetForm">
+    <input type="password" id="newPassword" placeholder="Neues Passwort" required />
+    <button type="submit">Zurücksetzen</button>
+    <p id="resetMsg" style="display:none;"></p>
+    </form>
+
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get("token");
+
+    document.getElementById("resetForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const password = document.getElementById("newPassword").value;
+    const msg = document.getElementById("resetMsg");
+
+    const res = await fetch("/auth/reset_password.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ token, password })
+    });
+
+    const data = await res.json();
+    msg.style.display = "block";
+    msg.style.color = res.ok ? "green" : "red";
+    msg.textContent = data.message || data.error;
+    });
+</script>
+</body>
+</html>
