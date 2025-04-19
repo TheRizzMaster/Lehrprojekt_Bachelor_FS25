@@ -40,5 +40,5 @@ try {
 
 } catch (PDOException $e) {
     http_response_code(409);
-    echo json_encode(["error" => "Email bereits registriert"]);
+    echo json_encode(["error" => "Email bereits registriert", "message" => $e->getMessage()]);
 }
