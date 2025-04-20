@@ -4,7 +4,7 @@ use PHPMailer\PHPMailer\Exception;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-function sendVerificationEmail($toEmail, $toName, $token) {
+function sendVerificationEmail($toEmail, $toName, $token, $url) {
     $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
     $dotenv->load();
 
@@ -28,7 +28,7 @@ function sendVerificationEmail($toEmail, $toName, $token) {
         $mail->isHTML(true);
         $mail->Subject = 'Bitte bestätige deine E-Mail-Adresse';
 
-        $link = $_ENV['APP_URL'] . '/auth/verify_email.php?token=' . urlencode($token);
+        $link = $_ENV['APP_URL'] . $url . urlencode($token);
         $mail->Body = "
             Hallo $toName,<br><br>
             Danke für deine Registrierung!<br>

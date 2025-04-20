@@ -31,7 +31,7 @@ try {
     $stmt->execute([$name, $email, $hash, $token]);
 
     // Mail versenden
-    if (sendVerificationEmail($email, $name, $token)) {
+    if (sendVerificationEmail($email, $name, $token, '/auth/verify_email.php?token=')) {
         echo json_encode(["success" => true, "message" => "Account erstellt – Bitte E-Mail bestätigen"]);
     } else {
         http_response_code(500);
