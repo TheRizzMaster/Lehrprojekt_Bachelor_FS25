@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/../bootstrap.php';
-require_once __DIR__ . '/../logic/send_verification_email.php'; // kannst du wiederverwenden
+require_once __DIR__ . '/../logic/send_verification_email.php';
 
 header('Content-Type: application/json');
 $data = json_decode(file_get_contents('php://input'), true);
