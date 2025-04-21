@@ -20,6 +20,8 @@ function sendVerificationEmail($toEmail, $toName, $token, $subject, $message, $p
         $mail->SMTPSecure = 'ssl';
         $mail->Port       = 465;
 
+        $mail->CharSet = 'UTF-8';
+
         // Sender and recipient
         $mail->setFrom($_ENV['SMTP_FROM'], $_ENV['SMTP_FROM_NAME']);
         $mail->addAddress($toEmail, $toName);
