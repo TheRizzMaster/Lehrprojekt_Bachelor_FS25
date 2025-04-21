@@ -35,6 +35,11 @@
         color: var(--color-dark);
         }
 
+        button,
+        input {
+        box-sizing: border-box;
+        }
+
         input[type="password"] {
         width: 100%;
         padding: 12px 14px;
@@ -92,9 +97,14 @@
     });
 
     const data = await res.json();
-    msg.style.display = "block";
-    msg.style.color = res.ok ? "green" : "red";
-    msg.textContent = data.message || data.error;
+      msg.style.display = "block";
+      msg.style.color = res.ok ? "var(--color-success)" : "var(--color-danger)";
+      msg.textContent = data.message || data.error;
+        if (res.ok) {
+            setTimeout(() => {
+            window.location.href = "./login.html";
+            }, 2000);
+        }
     });
 </script>
 </body>
