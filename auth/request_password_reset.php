@@ -20,7 +20,7 @@ $stmt = $pdo->prepare("UPDATE users SET password_reset_token = ?, password_reset
 $stmt->execute([$token, $user['id']]);
 
 $link = $_ENV['APP_URL'] . "/reset_form.html?token=" . urlencode($token);
-$message = "Hallo,<br>klicke hier um dein Passwort zurückzusetzen:<br><a href=\"$link\">$link</a>";
+$message = "klicke hier um dein Passwort zurückzusetzen:";
 
 sendVerificationEmail($user['email'], $user['name'], $token, "Passwort zurücksetzen", $message, '/reset_form.html?token=');
 

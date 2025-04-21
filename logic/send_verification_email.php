@@ -4,7 +4,7 @@ use PHPMailer\PHPMailer\Exception;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-function sendVerificationEmail($toEmail, $toName, $token, $url) {
+function sendVerificationEmail($toEmail, $toName, $token, $subject, $message, $path) {
     $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
     $dotenv->load();
 
@@ -17,23 +17,25 @@ function sendVerificationEmail($toEmail, $toName, $token, $url) {
         $mail->SMTPAuth   = true;
         $mail->Username   = $_ENV['SMTP_USER'];
         $mail->Password   = $_ENV['SMTP_PASS'];
-        $mail->SMTPSecure = 'ssl'; // Verschlüsselung über SMTPS
+        $mail->SMTPSecure = 'ssl';
         $mail->Port       = 465;
 
-        // Absender & Empfänger
+        // Sender and recipient
         $mail->setFrom($_ENV['SMTP_FROM'], $_ENV['SMTP_FROM_NAME']);
         $mail->addAddress($toEmail, $toName);
 
-        // Inhalt
+        // Content
         $mail->isHTML(true);
-        $mail->Subject = 'Bitte bestätige deine E-Mail-Adresse';
+        $mail->Subject = $subject;
 
-        $link = $_ENV['APP_URL'] . $url . urlencode($token);
+        // Link erstellen
+        $fullLink = $_ENV['APP_URL'] . $path . urlencode($token);
+
+        // Inhalt
         $mail->Body = "
             Hallo $toName,<br><br>
-            Danke für deine Registrierung!<br>
-            Bitte bestätige deine E-Mail-Adresse:<br><br>
-            <a href=\"$link\">$link</a><br><br>
+            $message<br><br>
+            <a href=\"$fullLink\">$fullLink</a><br><br>
             Dein Selflearning Coach
         ";
 
@@ -41,7 +43,7 @@ function sendVerificationEmail($toEmail, $toName, $token, $url) {
         return true;
 
     } catch (Exception $e) {
-        error_log("Mail konnte nicht gesendet werden: " . $mail->ErrorInfo);
+        error_log("Mailer Error: " . $mail->ErrorInfo);
         return false;
     }
 }
