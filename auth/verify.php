@@ -5,7 +5,7 @@ use Firebase\JWT\Key;
 require_once __DIR__ . '/../bootstrap.php';
 header('Content-Type: application/json');
 
-// 🔒 Sicherer Fallback für Authorization-Header
+// 🛡 Sicherer Header-Fallback für Apache, Nginx, PHP-FPM usw.
 function getAuthorizationHeader() {
     if (isset($_SERVER['Authorization'])) {
         return trim($_SERVER["Authorization"]);
@@ -22,6 +22,7 @@ function getAuthorizationHeader() {
     return null;
 }
 
+// 🔍 Header holen und prüfen
 $authHeader = getAuthorizationHeader();
 
 if (!$authHeader) {
@@ -38,11 +39,11 @@ if (!preg_match('/Bearer\s+(.*)$/i', $authHeader, $matches)) {
 
 $jwt = $matches[1];
 
+// ✅ Token prüfen
 try {
     $decoded = JWT::decode($jwt, new Key(JWT_SECRET, 'HS256'));
     $user_id = $decoded->sub;
 
-    // ✅ Optional: zurückgeben für weitere Nutzung
     echo json_encode([
         "valid" => true,
         "user_id" => $user_id
