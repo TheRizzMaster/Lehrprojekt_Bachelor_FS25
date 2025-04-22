@@ -6,7 +6,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   
     const res = await fetch("/api/modules.php", {
       headers: {
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${token}`,
+        "Content-Type:": "application/json"
       }
     });
   
