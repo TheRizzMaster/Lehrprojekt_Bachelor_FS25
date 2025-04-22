@@ -38,42 +38,42 @@ body {
     padding: 2rem;
   }
   
-  /* Lektionen-Grid */
   .lesson-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
   }
   
-  /* Card-Design */
   .lesson-card {
     background: white;
-    border-radius: 12px;
     border: 1px solid #e2e8f0;
+    border-left: 6px solid transparent;
+    border-radius: 12px;
     padding: 1.5rem;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
     transition: transform 0.2s ease;
-  }
-  
-  .lesson-card:hover {
-    transform: translateY(-4px);
+    position: relative;
   }
   
   .lesson-card h3 {
-    margin: 0 0 0.5rem;
+    margin-top: 0;
     font-size: 1.2rem;
-    color: var(--color-dark);
   }
   
   .lesson-card p {
     font-size: 0.9rem;
-    color: var(--color-secondary);
-    margin-bottom: 0.5rem;
+    color: #4a5568;
   }
   
-  /* Statusfarben */
   .lesson-card.completed {
-    border-left: 6px solid var(--color-success);
+    border-left-color: var(--color-success);
+  }
+  
+  .lesson-card.in-progress {
+    border-left-color: var(--color-primary);
   }
   
   .lesson-card.locked {
@@ -81,6 +81,10 @@ body {
     pointer-events: none;
   }
   
-  .lesson-card.in-progress {
-    border-left: 6px solid var(--color-primary);
+  .lock-icon {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    font-size: 1.2rem;
+    color: #a0aec0;
   }
