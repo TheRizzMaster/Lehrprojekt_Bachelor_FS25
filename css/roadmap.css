@@ -1,0 +1,32 @@
+.lesson-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+  }
+  
+  .lesson-card {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  }
+  
+  .lesson-card.completed {
+    border-left: 6px solid var(--color-success);
+  }
+  
+  .lesson-card.locked {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  
+  .lesson-card h3 {
+    margin-top: 0;
+  }
+  
+  .lesson-card p {
+    color: #4a5568;
+    font-size: 0.9rem;
+  }

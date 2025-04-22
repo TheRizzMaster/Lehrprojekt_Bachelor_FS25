@@ -1,18 +1,16 @@
 document.addEventListener("DOMContentLoaded", async () => {
     const grid = document.getElementById("grid-container");
-    grid.innerHTML = ""; // vorher leeren
+    grid.innerHTML = "";
   
     const token = localStorage.getItem("token");
   
     const res = await fetch("/api/modules.php", {
       headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`
       }
     });
   
     const data = await res.json();
-    console.log(data);
   
     if (!res.ok) {
       grid.innerHTML = "<p>Fehler beim Laden der Module</p>";
@@ -50,7 +48,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         card.classList.add("grid-item");
   
         const isUnlocked = mod.progress === 100 || unlockNext;
-        const isFirst = index === 0;
   
         if (mod.progress === 100) {
           card.classList.add("done");
@@ -72,13 +69,17 @@ document.addEventListener("DOMContentLoaded", async () => {
                 : "Schliesse das vorherige Modul zuerst ab"
             }
           </p>
-          <div class="progress-bar ${mod.progress === 100 ? "green" : isUnlocked ? "blue" : "grey"}">
+          <div class="progress-bar ${
+            mod.progress === 100 ? "green" : isUnlocked ? "blue" : "grey"
+          }">
             <div class="fill" style="width: ${mod.progress}%"></div>
           </div>
           <p class="percent">${mod.progress}% Abgeschlossen</p>
           ${
             isUnlocked
-              ? `<button class="action-btn ${mod.progress === 100 ? "ghost" : "primary"}">
+              ? `<button class="action-btn ${
+                  mod.progress === 100 ? "ghost" : "primary"
+                }" onclick="window.location.href='roadmap.html?modul_id=${mod.id}'">
                    ${mod.progress === 100 ? "Modul ansehen" : "Fortsetzen"}
                  </button>`
               : `<div class="lock-icon">🔒</div>`
