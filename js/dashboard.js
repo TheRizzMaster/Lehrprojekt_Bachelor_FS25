@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
     });
   
-    const data = await res.text();
+    const data = await res.json();
     console.log(data);
   
     if (!res.ok) {
