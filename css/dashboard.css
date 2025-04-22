@@ -139,3 +139,47 @@ main {
     font-size: 1.2rem;
     color: #a0aec0;
   }
+
+  .course-wrapper {
+    margin-bottom: 2rem;
+  }
+  
+  .course-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--color-light, #f1f5f9);
+    padding: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  
+  .course-header h2 {
+    font-size: 1.2rem;
+    margin: 0;
+  }
+  
+  .course-header p {
+    font-size: 0.9rem;
+    margin: 0;
+    color: #64748b;
+  }
+  
+  .toggle-btn {
+    background: none;
+    border: none;
+    font-size: 1.4rem;
+    cursor: pointer;
+    color: #64748b;
+  }
+  
+  .module-grid.hidden {
+    display: none;
+  }
+  
+  .module-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    padding: 1.5rem;
+  }

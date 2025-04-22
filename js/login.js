@@ -64,10 +64,10 @@ document.addEventListener("DOMContentLoaded", () => {
       if (res.ok) {
         localStorage.setItem("token", data.token);
         showMessage(loginMessage, "Erfolgreich angemeldet!", true);
-        // 1 sekunde warten, bevor weitergeleitet wird
+        // 0.5 sekunden warten, bevor weitergeleitet wird
         setTimeout(() => {
           window.location.href = "/dashboard.html";
-        }, 1000);
+        }, 500);
       } else {
         showMessage(loginMessage, data.error || "Fehler beim Anmelden");
       }
