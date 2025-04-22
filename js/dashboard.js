@@ -7,11 +7,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     const res = await fetch("/api/modules.php", {
       headers: {
         Authorization: `Bearer ${token}`,
-        "Content-Type:": "application/json"
+        "Content-Type": "application/json",
       }
     });
   
-    const data = await res.json();
+    const data = await res.text();
+    console.log(data);
   
     if (!res.ok) {
       grid.innerHTML = "<p>Fehler beim Laden der Module</p>";

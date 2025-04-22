@@ -1,4 +1,5 @@
 <?php
+ob_clean();
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
@@ -42,3 +43,4 @@ foreach ($courses as &$course) {
 }
 
 echo json_encode($courses);
+exit;
