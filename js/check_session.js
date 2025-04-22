@@ -26,3 +26,10 @@ async function checkSession(redirectIfInvalid = true) {
     return false;
   }
 }
+
+checkSession(); // Überprüfen Sie die Sitzung beim Laden der Seite
+
+function logout() {
+  localStorage.removeItem("token");
+  window.location.href = "/login.html";
+}
