@@ -1,3 +1,5 @@
+checkSession();
+
 async function checkSession(redirectIfInvalid = true) {
   const token = localStorage.getItem("token");
 
@@ -27,7 +29,6 @@ async function checkSession(redirectIfInvalid = true) {
   }
 }
 
-checkSession(); // Überprüfen Sie die Sitzung beim Laden der Seite
 
 function logout() {
   localStorage.removeItem("token");
