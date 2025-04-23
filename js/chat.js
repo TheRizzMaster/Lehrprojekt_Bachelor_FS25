@@ -8,61 +8,71 @@ document.addEventListener("DOMContentLoaded", async () => {
   
     let chatId = null;
   
+    async function loadLessonInfo() {
+        const res = await fetch(`/api/lesson.php?lesson_id=${lessonId}`, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        const data = await res.json();
+        document.getElementById("lesson-titel").textContent = data.title;
+        document.getElementById("lesson-subtitle").textContent = data.description;
+    }
+
     async function loadChat() {
-      const res = await fetch(`/api/chat.php?lesson_id=${lessonId}`, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-      const data = await res.json();
-      chatId = data.chat_id;
-  
-      chatBody.innerHTML = "";
-      data.messages.forEach(msg => appendMessage(msg.sender, msg.message));
-      scrollToBottom();
+        const res = await fetch(`/api/chat.php?lesson_id=${lessonId}`, {
+            headers: { Authorization: `Bearer ${token}` }
+        });
+        const data = await res.json();
+        chatId = data.chat_id;
+    
+        chatBody.innerHTML = "";
+        data.messages.forEach(msg => appendMessage(msg.sender, msg.message));
+        scrollToBottom();
     }
   
     function appendMessage(sender, text) {
-      const div = document.createElement("div");
-      div.classList.add("message");
-      div.classList.add(sender === "user" ? "from-user" : "from-ai");
-      div.textContent = text;
-      chatBody.appendChild(div);
+        const div = document.createElement("div");
+        div.classList.add("message");
+        div.classList.add(sender === "user" ? "from-user" : "from-ai");
+        div.textContent = text;
+        chatBody.appendChild(div);
     }
   
     async function sendMessage() {
-      const text = input.value.trim();
-      if (!text || !chatId) return;
-  
-      appendMessage("user", text);
-      scrollToBottom();
-      input.value = "";
-      input.disabled = true;
-      sendBtn.disabled = true;
-  
-      const res = await fetch("/api/chat.php", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`
-        },
-        body: JSON.stringify({ chat_id: chatId, message: text })
-      });
-  
-      const data = await res.json();
-      appendMessage("ai", data.response);
-      scrollToBottom();
-      input.disabled = false;
-      sendBtn.disabled = false;
-      input.focus();
+        const text = input.value.trim();
+        if (!text || !chatId) return;
+    
+        appendMessage("user", text);
+        scrollToBottom();
+        input.value = "";
+        input.disabled = true;
+        sendBtn.disabled = true;
+    
+        const res = await fetch("/api/chat.php", {
+            method: "POST",
+            headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+            },
+            body: JSON.stringify({ chat_id: chatId, message: text })
+        });
+    
+        const data = await res.json();
+        appendMessage("ai", data.response);
+        scrollToBottom();
+        input.disabled = false;
+        sendBtn.disabled = false;
+        input.focus();
     }
   
     function scrollToBottom() {
-      chatBody.scrollTop = chatBody.scrollHeight;
+        chatBody.scrollTop = chatBody.scrollHeight;
     }
   
     sendBtn.addEventListener("click", sendMessage);
     input.addEventListener("keydown", e => {
-      if (e.key === "Enter") sendMessage();
+        if (e.key === "Enter") sendMessage();
     });
   
+    loadLessonInfo();
     loadChat();
 });
