@@ -153,5 +153,5 @@ function askOpenAI(array $history, array $config): string {
     curl_close($ch);
     $result = json_decode($response, true);
 
-    return $result["choices"][0]["message"]["content"] ?? "Ich konnte gerade keine Antwort generieren.";
+    return $result ?? "Ich konnte gerade keine Antwort generieren.";
 }
