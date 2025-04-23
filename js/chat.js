@@ -62,6 +62,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         input.disabled = false;
         sendBtn.disabled = false;
         input.focus();
+        console.log(data);
     }
   
     function scrollToBottom() {
