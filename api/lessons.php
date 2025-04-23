@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/../bootstrap.php';
-require_once __DIR__ . '/../auth/verify.php'; // $user_id
+require_once __DIR__ . '/../auth/verify.php'; // setzt $user_id
 
 header('Content-Type: application/json');
 
@@ -11,15 +11,31 @@ if (!$module_id) {
     exit;
 }
 
-$stmt = $pdo->prepare("
+// Modulinformationen holen
+$modStmt = $pdo->prepare("SELECT title, description FROM modules WHERE id = ?");
+$modStmt->execute([$module_id]);
+$module = $modStmt->fetch(PDO::FETCH_ASSOC);
+
+if (!$module) {
+    http_response_code(404);
+    echo json_encode(["error" => "Modul nicht gefunden"]);
+    exit;
+}
+
+// Lektionen laden
+$lessonStmt = $pdo->prepare("
     SELECT l.id, l.title, l.description,
-        p.completed_at IS NOT NULL AS completed
+           p.completed_at IS NOT NULL AS completed
     FROM lessons l
     LEFT JOIN progress p ON p.lesson_id = l.id AND p.user_id = ?
     WHERE l.module_id = ?
-    ORDER BY l.id ASC
+    ORDER BY l.position ASC
 ");
-$stmt->execute([$user_id, $module_id]);
-$lessons = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$lessonStmt->execute([$user_id, $module_id]);
+$lessons = $lessonStmt->fetchAll(PDO::FETCH_ASSOC);
 
-echo json_encode($lessons);
+// Modulinfo + Lektionen zurückgeben
+echo json_encode([
+    "module" => $module,
+    "lessons" => $lessons
+]);

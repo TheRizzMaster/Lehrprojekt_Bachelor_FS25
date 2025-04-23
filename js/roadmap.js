@@ -2,7 +2,9 @@
     const token = localStorage.getItem("token");
     const params = new URLSearchParams(window.location.search);
     const modulId = params.get("modul_id");
+  
     const grid = document.getElementById("lesson-grid");
+    const titleEl = document.getElementById("module-header");
   
     if (!modulId) {
       alert("Modul-ID fehlt.");
@@ -21,14 +23,14 @@
         return;
       }
   
-
-      console.log("Lektionsdaten:", data);
-      
-      grid.innerHTML = "";
+      // Setze Modul-Titel
+      titleEl.textContent = data.module?.title || "Modul";
   
+      // Lektionen rendern
+      grid.innerHTML = "";
       let unlockNext = true;
   
-      data.forEach((lesson) => {
+      data.lessons.forEach((lesson) => {
         const card = document.createElement("div");
         card.classList.add("lesson-card");
   
