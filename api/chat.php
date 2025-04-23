@@ -112,7 +112,7 @@ if ($method === 'POST') {
 }
 
 // GPT-Funktion
-function askOpenAI(array $history, array $config): string {
+function askOpenAI(array $history, array $config) {
     $apiKey = $_ENV['OPENAI_API_KEY'];
     $endpoint = "https://api.openai.com/v1/chat/completions";
 
