@@ -134,7 +134,7 @@ function askOpenAI(array $history, array $config) {
     ]);
 
     $data = [
-        "model" => "gpt-4",
+        "model" => "gpt-4.1-mini",
         "messages" => $messages,
         "temperature" => 0.7
     ];
