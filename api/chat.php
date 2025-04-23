@@ -22,6 +22,16 @@ if ($method === 'GET') {
         $chat_id = bin2hex(random_bytes(16));
         $insert = $pdo->prepare("INSERT INTO chats (id, user_id, lesson_id) VALUES (?, ?, ?)");
         $insert->execute([$chat_id, $user_id, $lesson_id]);
+    
+        // Lade Beschreibung aus der Lektion
+        $stmt = $pdo->prepare("SELECT description FROM lessons WHERE id = ?");
+        $stmt->execute([$lesson_id]);
+        $desc = $stmt->fetchColumn();
+    
+        // Füge Systemnachricht hinzu
+        $systemMsg = "In dieser Lektion: " . ($desc ?: "Lerneinheit starten.");
+        $msgStmt = $pdo->prepare("INSERT INTO chat_messages (chat_id, sender, message) VALUES (?, 'system', ?)");
+        $msgStmt->execute([$chat_id, $systemMsg]);
     } else {
         $chat_id = $chat['id'];
     }
@@ -49,6 +59,7 @@ if ($method === 'POST') {
     // Nachricht speichern
     $insert = $pdo->prepare("INSERT INTO chat_messages (chat_id, sender, message) VALUES (?, 'user', ?)");
     $insert->execute([$chat_id, $message]);
+    $pdo->prepare("UPDATE chats SET user_turns = user_turns + 1 WHERE id = ?")->execute([$chat_id]);
 
     // Chat-Konfiguration der Lektion laden
     $lessonStmt = $pdo->prepare("SELECT lesson_id FROM chats WHERE id = ?");
@@ -76,6 +87,8 @@ if ($method === 'POST') {
         $check = $pdo->prepare("SELECT * FROM progress WHERE user_id = ? AND lesson_id = ?");
         $check->execute([$user_id, $lesson_id]);
 
+        $pdo->prepare("UPDATE chats SET success = 1, ended_at = NOW() WHERE id = ?")->execute([$chat_id]);
+
         if ($check->rowCount() > 0) {
             $update = $pdo->prepare("UPDATE progress SET completed_at = NOW(), status = 'completed' WHERE user_id = ? AND lesson_id = ?");
             $update->execute([$user_id, $lesson_id]);
@@ -86,6 +99,9 @@ if ($method === 'POST') {
     } else {
         $final_msg = $ai_response;
     }
+
+    $approx_tokens = intval((strlen($message) + strlen($final_msg)) / 4);
+    $pdo->prepare("UPDATE chats SET token_usage = token_usage + ? WHERE id = ?")->execute([$approx_tokens, $chat_id]);
 
     // Antwort speichern
     $insert = $pdo->prepare("INSERT INTO chat_messages (chat_id, sender, message) VALUES (?, 'ai', ?)");
