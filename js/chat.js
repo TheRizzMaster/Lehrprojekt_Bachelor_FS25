@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
     
         const data = await res.text();
-        appendMessage("ai", data.response);
+        appendMessage("ai", data);
         scrollToBottom();
         input.disabled = false;
         sendBtn.disabled = false;
