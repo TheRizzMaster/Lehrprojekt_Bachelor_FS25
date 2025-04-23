@@ -57,12 +57,12 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
     
         const data = await res.text();
-        // appendMessage("ai", data.response);
-        // scrollToBottom();
-        // input.disabled = false;
-        // sendBtn.disabled = false;
-        // input.focus();
-        console.log(data);
+        appendMessage("ai", data.response);
+        scrollToBottom();
+        input.disabled = false;
+        sendBtn.disabled = false;
+        input.focus();
+        //console.log(data);
     }
   
     function scrollToBottom() {
