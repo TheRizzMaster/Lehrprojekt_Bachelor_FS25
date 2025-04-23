@@ -58,6 +58,10 @@ body {
     position: relative;
     cursor: pointer;
   }
+
+  .lesson-card:hover {
+    transform: translateY(-2px);
+  }
   
   .lesson-card h3 {
     margin-top: 0;
