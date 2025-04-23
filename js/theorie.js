@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const titleEl = document.querySelector(".lesson-header h1");
     const subtitleEl = document.querySelector(".lesson-header .subtitle");
     const card = document.querySelector(".lesson-card");
+    const chatButton = document.querySelector("#chat-button");
   
     if (!lessonId) {
       titleEl.textContent = "Fehler";
@@ -65,4 +66,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         card.appendChild(audio);
       }
     });
-  });
+
+    chatButton.addEventListener("click", () => {
+      window.location.href = `./chat.html?lesson_id=${lessonId}`;
+    });
+
+});
