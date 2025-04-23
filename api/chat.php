@@ -151,7 +151,12 @@ function askOpenAI(array $history, array $config) {
 
     $response = curl_exec($ch);
     curl_close($ch);
+
+    // DEBUG:
+file_put_contents(__DIR__ . "/gpt_debug.json", $response);
     $result = json_decode($response, true);
+
+
 
     return $result["choices"][0]["message"]["content"] ?? "Ich konnte gerade keine Antwort generieren.";
 }
