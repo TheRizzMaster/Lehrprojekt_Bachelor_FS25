@@ -56,12 +56,12 @@ document.addEventListener("DOMContentLoaded", async () => {
             body: JSON.stringify({ chat_id: chatId, message: text })
         });
     
-        const data = await res.json();
-        appendMessage("ai", data.response);
-        scrollToBottom();
-        input.disabled = false;
-        sendBtn.disabled = false;
-        input.focus();
+        const data = await res.text();
+        // appendMessage("ai", data.response);
+        // scrollToBottom();
+        // input.disabled = false;
+        // sendBtn.disabled = false;
+        // input.focus();
         console.log(data);
     }
   
