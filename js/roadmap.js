@@ -59,7 +59,7 @@
         if (!card.classList.contains("locked")) {
           card.style.cursor = "pointer";
           card.addEventListener("click", () => {
-            window.location.href = `theory.html?lesson_id=${lesson.id}`;
+            window.location.href = `theorie.html?lesson_id=${lesson.id}`;
           });
         }
   
