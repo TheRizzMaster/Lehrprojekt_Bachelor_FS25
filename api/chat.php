@@ -26,7 +26,7 @@ if ($method === 'GET') {
         $chat_id = $chat['id'];
     }
 
-    // Nachrichten holen
+    // Verlauf laden
     $msgStmt = $pdo->prepare("SELECT sender, message, created_at FROM chat_messages WHERE chat_id = ? ORDER BY created_at ASC");
     $msgStmt->execute([$chat_id]);
     $messages = $msgStmt->fetchAll(PDO::FETCH_ASSOC);
@@ -46,28 +46,57 @@ if ($method === 'POST') {
         exit;
     }
 
-    // Nachricht des Users speichern
+    // Nachricht speichern
     $insert = $pdo->prepare("INSERT INTO chat_messages (chat_id, sender, message) VALUES (?, 'user', ?)");
     $insert->execute([$chat_id, $message]);
 
-    // Verlauf holen (letzte 10)
-    $fetch = $pdo->prepare("SELECT sender, message FROM chat_messages WHERE chat_id = ? ORDER BY created_at ASC LIMIT 10");
+    // Chat-Konfiguration der Lektion laden
+    $lessonStmt = $pdo->prepare("SELECT lesson_id FROM chats WHERE id = ?");
+    $lessonStmt->execute([$chat_id]);
+    $lesson_id = $lessonStmt->fetchColumn();
+
+    $configStmt = $pdo->prepare("SELECT chat_config FROM lessons WHERE id = ?");
+    $configStmt->execute([$lesson_id]);
+    $lesson = $configStmt->fetch();
+    $config = json_decode($lesson['chat_config'] ?? '{}', true);
+
+    // Verlauf holen
+    $fetch = $pdo->prepare("SELECT sender, message FROM chat_messages WHERE chat_id = ? ORDER BY created_at ASC LIMIT 15");
     $fetch->execute([$chat_id]);
     $history = $fetch->fetchAll(PDO::FETCH_ASSOC);
 
     // GPT-Antwort generieren
-    $ai_response = askOpenAI($history);
+    $ai_response = askOpenAI($history, $config);
+
+    // Falls JSON zurückkommt: Erfolg erkannt
+    $decoded = json_decode($ai_response, true);
+    if (is_array($decoded) && isset($decoded["success"]) && $decoded["success"] === true) {
+        $final_msg = $decoded["message"] ?? "🎉 Ziel erreicht!";
+        // Fortschritt setzen
+        $check = $pdo->prepare("SELECT * FROM progress WHERE user_id = ? AND lesson_id = ?");
+        $check->execute([$user_id, $lesson_id]);
+
+        if ($check->rowCount() > 0) {
+            $update = $pdo->prepare("UPDATE progress SET completed_at = NOW(), status = 'completed' WHERE user_id = ? AND lesson_id = ?");
+            $update->execute([$user_id, $lesson_id]);
+        } else {
+            $insert = $pdo->prepare("INSERT INTO progress (user_id, lesson_id, status, completed_at) VALUES (?, ?, 'completed', NOW())");
+            $insert->execute([$user_id, $lesson_id]);
+        }
+    } else {
+        $final_msg = $ai_response;
+    }
 
     // Antwort speichern
     $insert = $pdo->prepare("INSERT INTO chat_messages (chat_id, sender, message) VALUES (?, 'ai', ?)");
-    $insert->execute([$chat_id, $ai_response]);
+    $insert->execute([$chat_id, $final_msg]);
 
-    echo json_encode(["response" => $ai_response]);
+    echo json_encode(["response" => $final_msg]);
     exit;
 }
 
-// === GPT-Funktion ===
-function askOpenAI($history) {
+// GPT-Funktion
+function askOpenAI(array $history, array $config): string {
     $apiKey = $_ENV['OPENAI_API_KEY'];
     $endpoint = "https://api.openai.com/v1/chat/completions";
 
@@ -76,10 +105,16 @@ function askOpenAI($history) {
         "content" => $m["message"]
     ], $history);
 
-    // System-Prompt
+    $goal = $config['goal'] ?? "Der Lernende soll ein Verständnisziel erreichen.";
+    $style = $config['style'] ?? "Motivierend und schrittweise.";
+    $success = $config['success_condition'] ?? "Das Ziel ist vollständig erfüllt.";
+    $role = $config['role'] ?? "Du bist ein Lern-Coach.";
+
+    $system_prompt = "$role Ziel: $goal. Stil: $style. Wenn das Ziel erreicht ist ($success), antworte mit folgendem JSON: { \"success\": true, \"message\": \"...\" }";
+
     array_unshift($messages, [
         "role" => "system",
-        "content" => "Du bist ein geduldiger Lern-Coach, der dem Benutzer hilft, komplexe Probleme in kleine Schritte zu zerlegen. Stelle gezielte Rückfragen und motiviere zur Selbstlösung."
+        "content" => $system_prompt
     ]);
 
     $data = [
@@ -93,7 +128,7 @@ function askOpenAI($history) {
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_HTTPHEADER => [
             "Content-Type: application/json",
-            "Authorization: Bearer {$apiKey}"
+            "Authorization: Bearer $apiKey"
         ],
         CURLOPT_POSTFIELDS => json_encode($data)
     ]);
@@ -102,5 +137,5 @@ function askOpenAI($history) {
     curl_close($ch);
     $result = json_decode($response, true);
 
-    return $result["choices"][0]["message"]["content"] ?? "Leider konnte ich gerade keine Antwort generieren.";
+    return $result["choices"][0]["message"]["content"] ?? "Ich konnte gerade keine Antwort generieren.";
 }
