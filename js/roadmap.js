@@ -21,6 +21,9 @@
         return;
       }
   
+
+      console.log("Lektionsdaten:", data);
+      
       grid.innerHTML = "";
   
       let unlockNext = true;
