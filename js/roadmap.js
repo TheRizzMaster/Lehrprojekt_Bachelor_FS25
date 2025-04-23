@@ -23,16 +23,20 @@
         return;
       }
   
-      // Setze Modul-Titel
       titleEl.textContent = data.module?.title || "Modul";
   
-      // Lektionen rendern
       grid.innerHTML = "";
       let unlockNext = true;
   
       data.lessons.forEach((lesson) => {
         const card = document.createElement("div");
         card.classList.add("lesson-card");
+  
+        const statusText = lesson.completed
+          ? "✅ Abgeschlossen"
+          : unlockNext
+          ? "🕓 Offen"
+          : "🔒 Gesperrt";
   
         if (lesson.completed) {
           card.classList.add("completed");
@@ -43,20 +47,21 @@
           card.classList.add("locked");
         }
   
+        // Inhalt
         card.innerHTML = `
           <h3>${lesson.title}</h3>
           <p>${lesson.description}</p>
-          <p>Status: ${
-            lesson.completed
-              ? "✅ Abgeschlossen"
-              : card.classList.contains("in-progress")
-              ? "🕓 Offen"
-              : "🔒 Gesperrt"
-          }</p>
-          ${
-            card.classList.contains("locked") ? `<div class="lock-icon">🔒</div>` : ""
-          }
+          <p>Status: ${statusText}</p>
+          ${card.classList.contains("locked") ? `<div class="lock-icon">🔒</div>` : ""}
         `;
+  
+        // Clickfunktion nur wenn freigeschaltet
+        if (!card.classList.contains("locked")) {
+          card.style.cursor = "pointer";
+          card.addEventListener("click", () => {
+            window.location.href = `theory.html?lesson_id=${lesson.id}`;
+          });
+        }
   
         grid.appendChild(card);
       });
