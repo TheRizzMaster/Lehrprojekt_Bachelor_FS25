@@ -9,6 +9,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   
     const titleEl = document.getElementById("lesson-titel");
     const subtitleEl = document.getElementById("lesson-subtitle");
+
+    const typing = document.getElementById("typing-indicator");
   
     let chatId = null;
   
@@ -60,33 +62,36 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   
     async function sendMessage() {
-      const text = input.value.trim();
-      if (!text || !chatId) return;
-  
-      appendMessage("user", text);
-      input.value = "";
-      input.disabled = true;
-      sendBtn.disabled = true;
-  
-      try {
-        const res = await fetch("/api/chat.php", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`
-          },
-          body: JSON.stringify({ chat_id: chatId, message: text })
-        });
-  
-        const data = await res.json();
-        appendMessage("ai", data.response);
-      } catch (err) {
-        appendMessage("ai", "Fehler beim Laden der Antwort.");
-      }
-  
-      input.disabled = false;
-      sendBtn.disabled = false;
-      input.focus();
+        const text = input.value.trim();
+        if (!text || !chatId) return;
+      
+        appendMessage("user", text);
+        input.value = "";
+        input.disabled = true;
+        sendBtn.disabled = true;
+        typing.style.display = "block"; // 👈 Tippen anzeigen
+      
+        try {
+          const res = await fetch("/api/chat.php", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`
+            },
+            body: JSON.stringify({ chat_id: chatId, message: text })
+          });
+      
+          const data = await res.json();
+          typing.style.display = "none"; // 👈 Tippen verstecken
+          appendMessage("ai", data.response);
+        } catch (err) {
+          typing.style.display = "none";
+          appendMessage("ai", "Fehler beim Laden der Antwort.");
+        }
+      
+        input.disabled = false;
+        sendBtn.disabled = false;
+        input.focus();
     }
   
     function scrollToBottom() {
