@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         input.value = "";
         input.disabled = true;
         sendBtn.disabled = true;
-        typing.style.display = "block"; // 👈 Tippen anzeigen
+        showTypingIndicator();
       
         try {
           const res = await fetch("/api/chat.php", {
@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           });
       
           const data = await res.json();
-          typing.style.display = "none"; // 👈 Tippen verstecken
+          hideTypingIndicator();
           appendMessage("ai", data.response);
         } catch (err) {
           typing.style.display = "none";
@@ -103,6 +103,24 @@ document.addEventListener("DOMContentLoaded", async () => {
       if (e.key === "Enter") sendMessage();
     });
   
+
+    function showTypingIndicator() {
+        const existing = document.getElementById("typing-indicator");
+        if (existing) return;
+      
+        const bubble = document.createElement("div");
+        bubble.id = "typing-indicator";
+        bubble.classList.add("message", "from-ai", "typing-bubble");
+        bubble.innerHTML = `<span class="dot"></span><span class="dot"></span><span class="dot"></span>`;
+        chatBody.appendChild(bubble);
+        scrollToBottom();
+      }
+      
+    function hideTypingIndicator() {
+        const bubble = document.getElementById("typing-indicator");
+        if (bubble) bubble.remove();
+    }
+
     await loadLessonInfo();
     await loadChat();
   });
