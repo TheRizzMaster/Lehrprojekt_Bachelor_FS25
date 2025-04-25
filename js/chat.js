@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         hideTypingIndicator();
   
         // Erfolg?
-        if (data.response.includes('"success": true')) {
+        if (data.success === true) {
           try {
             const result = JSON.parse(data.response);
             if (result.success) {

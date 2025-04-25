@@ -96,7 +96,7 @@ if ($method === 'POST') {
 
     $pdo->prepare("INSERT INTO chat_messages (chat_id, sender, message) VALUES (?, 'ai', ?)")->execute([$chat_id, $final_msg]);
 
-    echo json_encode(["response" => $final_msg], JSON_UNESCAPED_UNICODE);
+    echo json_encode(["response" => $final_msg, "success" => $success_detected], JSON_UNESCAPED_UNICODE);
     exit;
 }
 
