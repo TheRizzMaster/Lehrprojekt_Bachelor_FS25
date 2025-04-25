@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", async () => {
     const params = new URLSearchParams(window.location.search);
     const lessonId = params.get("lesson_id");
+    const modulId = params.get("modul_id");
     const token = localStorage.getItem("token");
   
     const chatBody = document.getElementById("chat-body");
@@ -9,8 +10,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   
     const titleEl = document.getElementById("lesson-titel");
     const subtitleEl = document.getElementById("lesson-subtitle");
-
-    const typing = document.getElementById("typing-indicator");
   
     let chatId = null;
   
@@ -45,7 +44,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       if (sender === "user") {
         div.classList.add("from-user");
       } else if (sender === "system") {
-        div.classList.add("from-ai"); // Optional: eigene Klasse .from-system
+        div.classList.add("from-ai");
         div.style.opacity = "0.7";
         div.style.fontStyle = "italic";
       } else {
@@ -54,44 +53,94 @@ document.addEventListener("DOMContentLoaded", async () => {
   
       div.textContent = text;
       chatBody.appendChild(div);
-  
-      // Scroll delay for DOM paint
-      setTimeout(() => {
-        scrollToBottom();
-      }, 10);
+      setTimeout(scrollToBottom, 10);
     }
   
     async function sendMessage() {
-        const text = input.value.trim();
-        if (!text || !chatId) return;
-      
-        appendMessage("user", text);
-        input.value = "";
-        input.disabled = true;
-        sendBtn.disabled = true;
-        showTypingIndicator();
-      
-        try {
-          const res = await fetch("/api/chat.php", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`
-            },
-            body: JSON.stringify({ chat_id: chatId, message: text })
-          });
-      
-          const data = await res.json();
-          hideTypingIndicator();
+      const text = input.value.trim();
+      if (!text || !chatId) return;
+  
+      appendMessage("user", text);
+      input.value = "";
+      input.disabled = true;
+      sendBtn.disabled = true;
+      showTypingIndicator();
+  
+      try {
+        const res = await fetch("/api/chat.php", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+          },
+          body: JSON.stringify({ chat_id: chatId, message: text })
+        });
+  
+        const data = await res.json();
+        hideTypingIndicator();
+  
+        // Erfolg?
+        if (data.response.includes('"success": true')) {
+          try {
+            const result = JSON.parse(data.response);
+            if (result.success) {
+              appendMessage("ai", result.message);
+              disableInput();
+              showFinishButton();
+              return;
+            }
+          } catch {
+            appendMessage("ai", data.response);
+          }
+        } else {
           appendMessage("ai", data.response);
-        } catch (err) {
-          typing.style.display = "none";
-          appendMessage("ai", "Fehler beim Laden der Antwort.");
         }
-      
-        input.disabled = false;
-        sendBtn.disabled = false;
-        input.focus();
+      } catch (err) {
+        hideTypingIndicator();
+        appendMessage("ai", "Fehler beim Laden der Antwort.");
+      }
+  
+      input.disabled = false;
+      sendBtn.disabled = false;
+      input.focus();
+    }
+  
+    function disableInput() {
+      input.disabled = true;
+      sendBtn.disabled = true;
+    }
+  
+    function showFinishButton() {
+      const wrapper = document.createElement("div");
+      wrapper.style.textAlign = "center";
+      wrapper.style.marginTop = "2rem";
+  
+      const btn = document.createElement("button");
+      btn.textContent = "Zur Roadmap zurück";
+      btn.classList.add("next-button");
+      btn.onclick = () => {
+        window.location.href = `roadmap.html?modul_id=${modulId}`;
+      };
+  
+      wrapper.appendChild(btn);
+      chatBody.appendChild(wrapper);
+      scrollToBottom();
+    }
+  
+    function showTypingIndicator() {
+      if (document.getElementById("typing-indicator")) return;
+  
+      const bubble = document.createElement("div");
+      bubble.id = "typing-indicator";
+      bubble.classList.add("message", "from-ai", "typing-bubble");
+      bubble.innerHTML = `<span class="dot"></span><span class="dot"></span><span class="dot"></span>`;
+      chatBody.appendChild(bubble);
+      scrollToBottom();
+    }
+  
+    function hideTypingIndicator() {
+      const bubble = document.getElementById("typing-indicator");
+      if (bubble) bubble.remove();
     }
   
     function scrollToBottom() {
@@ -103,24 +152,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       if (e.key === "Enter") sendMessage();
     });
   
-
-    function showTypingIndicator() {
-        const existing = document.getElementById("typing-indicator");
-        if (existing) return;
-      
-        const bubble = document.createElement("div");
-        bubble.id = "typing-indicator";
-        bubble.classList.add("message", "from-ai", "typing-bubble");
-        bubble.innerHTML = `<span class="dot"></span><span class="dot"></span><span class="dot"></span>`;
-        chatBody.appendChild(bubble);
-        scrollToBottom();
-      }
-      
-    function hideTypingIndicator() {
-        const bubble = document.getElementById("typing-indicator");
-        if (bubble) bubble.remove();
-    }
-
     await loadLessonInfo();
     await loadChat();
   });
