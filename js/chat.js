@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", async () => {
     const params = new URLSearchParams(window.location.search);
     const lessonId = params.get("lesson_id");
-    const modulId = params.get("modul_id");
+    const modulId = params.get("module_id");
     const token = localStorage.getItem("token");
   
     const chatBody = document.getElementById("chat-body");
