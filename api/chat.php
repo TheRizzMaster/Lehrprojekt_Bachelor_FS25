@@ -13,30 +13,23 @@ if ($method === 'GET') {
         exit;
     }
 
-    // Chat finden oder erstellen
     $stmt = $pdo->prepare("SELECT id FROM chats WHERE user_id = ? AND lesson_id = ?");
     $stmt->execute([$user_id, $lesson_id]);
     $chat = $stmt->fetch();
 
     if (!$chat) {
         $chat_id = bin2hex(random_bytes(16));
-        $insert = $pdo->prepare("INSERT INTO chats (id, user_id, lesson_id) VALUES (?, ?, ?)");
-        $insert->execute([$chat_id, $user_id, $lesson_id]);
-    
-        // Lade Beschreibung aus der Lektion
-        $stmt = $pdo->prepare("SELECT description FROM lessons WHERE id = ?");
-        $stmt->execute([$lesson_id]);
-        $desc = $stmt->fetchColumn();
-    
-        // Füge Systemnachricht hinzu
+        $pdo->prepare("INSERT INTO chats (id, user_id, lesson_id) VALUES (?, ?, ?)")->execute([$chat_id, $user_id, $lesson_id]);
+
+        $descStmt = $pdo->prepare("SELECT description FROM lessons WHERE id = ?");
+        $descStmt->execute([$lesson_id]);
+        $desc = $descStmt->fetchColumn();
         $systemMsg = "In dieser Lektion: " . ($desc ?: "Lerneinheit starten.");
-        $msgStmt = $pdo->prepare("INSERT INTO chat_messages (chat_id, sender, message) VALUES (?, 'system', ?)");
-        $msgStmt->execute([$chat_id, $systemMsg]);
+        $pdo->prepare("INSERT INTO chat_messages (chat_id, sender, message) VALUES (?, 'system', ?)")->execute([$chat_id, $systemMsg]);
     } else {
         $chat_id = $chat['id'];
     }
 
-    // Verlauf laden
     $msgStmt = $pdo->prepare("SELECT sender, message, created_at FROM chat_messages WHERE chat_id = ? ORDER BY created_at ASC");
     $msgStmt->execute([$chat_id]);
     $messages = $msgStmt->fetchAll(PDO::FETCH_ASSOC);
@@ -56,62 +49,57 @@ if ($method === 'POST') {
         exit;
     }
 
-    // Nachricht speichern
-    $insert = $pdo->prepare("INSERT INTO chat_messages (chat_id, sender, message) VALUES (?, 'user', ?)");
-    $insert->execute([$chat_id, $message]);
+    $pdo->prepare("INSERT INTO chat_messages (chat_id, sender, message) VALUES (?, 'user', ?)")->execute([$chat_id, $message]);
     $pdo->prepare("UPDATE chats SET user_turns = user_turns + 1 WHERE id = ?")->execute([$chat_id]);
 
-    // Chat-Konfiguration der Lektion laden
-    $lessonStmt = $pdo->prepare("SELECT lesson_id FROM chats WHERE id = ?");
-    $lessonStmt->execute([$chat_id]);
-    $lesson_id = $lessonStmt->fetchColumn();
+    $lesson_id = $pdo->prepare("SELECT lesson_id FROM chats WHERE id = ?");
+    $lesson_id->execute([$chat_id]);
+    $lesson_id = $lesson_id->fetchColumn();
 
-    $configStmt = $pdo->prepare("SELECT chat_config FROM lessons WHERE id = ?");
-    $configStmt->execute([$lesson_id]);
-    $lesson = $configStmt->fetch();
-    $config = json_decode($lesson['chat_config'] ?? '{}', true);
+    $stmt = $pdo->prepare("SELECT chat_config FROM lessons WHERE id = ?");
+    $stmt->execute([$lesson_id]);
+    $config = json_decode($stmt->fetchColumn() ?? '{}', true);
 
-    // Verlauf holen
     $fetch = $pdo->prepare("SELECT sender, message FROM chat_messages WHERE chat_id = ? ORDER BY created_at ASC LIMIT 15");
     $fetch->execute([$chat_id]);
     $history = $fetch->fetchAll(PDO::FETCH_ASSOC);
 
-    // GPT-Antwort generieren
     $ai_response = askOpenAI($history, $config);
 
-    // Falls JSON zurückkommt: Erfolg erkannt
-    $decoded = json_decode($ai_response, true);
-    if (is_array($decoded) && isset($decoded["success"]) && $decoded["success"] === true) {
-        $final_msg = $decoded["message"] ?? "🎉 Ziel erreicht!";
-        // Fortschritt setzen
+    $success_detected = false;
+    $final_msg = $ai_response;
+
+    $json_start = strpos($ai_response, '{');
+    if ($json_start !== false) {
+        $maybe_json = substr($ai_response, $json_start);
+        $decoded = json_decode($maybe_json, true);
+        if (is_array($decoded) && ($decoded['success'] ?? false) === true) {
+            $success_detected = true;
+            $final_msg = $decoded['message'] ?? '🎉 Ziel erreicht!';
+        }
+    }
+
+    if ($success_detected) {
+        $pdo->prepare("UPDATE chats SET success = 1, ended_at = NOW() WHERE id = ?")->execute([$chat_id]);
         $check = $pdo->prepare("SELECT * FROM progress WHERE user_id = ? AND lesson_id = ?");
         $check->execute([$user_id, $lesson_id]);
 
-        $pdo->prepare("UPDATE chats SET success = 1, ended_at = NOW() WHERE id = ?")->execute([$chat_id]);
-
         if ($check->rowCount() > 0) {
-            $update = $pdo->prepare("UPDATE progress SET completed_at = NOW(), status = 'completed' WHERE user_id = ? AND lesson_id = ?");
-            $update->execute([$user_id, $lesson_id]);
+            $pdo->prepare("UPDATE progress SET completed_at = NOW(), status = 'completed' WHERE user_id = ? AND lesson_id = ?")->execute([$user_id, $lesson_id]);
         } else {
-            $insert = $pdo->prepare("INSERT INTO progress (user_id, lesson_id, status, completed_at) VALUES (?, ?, 'completed', NOW())");
-            $insert->execute([$user_id, $lesson_id]);
+            $pdo->prepare("INSERT INTO progress (user_id, lesson_id, status, completed_at) VALUES (?, ?, 'completed', NOW())")->execute([$user_id, $lesson_id]);
         }
-    } else {
-        $final_msg = $ai_response;
     }
 
     $approx_tokens = intval((strlen($message) + strlen($final_msg)) / 4);
     $pdo->prepare("UPDATE chats SET token_usage = token_usage + ? WHERE id = ?")->execute([$approx_tokens, $chat_id]);
 
-    // Antwort speichern
-    $insert = $pdo->prepare("INSERT INTO chat_messages (chat_id, sender, message) VALUES (?, 'ai', ?)");
-    $insert->execute([$chat_id, $final_msg]);
+    $pdo->prepare("INSERT INTO chat_messages (chat_id, sender, message) VALUES (?, 'ai', ?)")->execute([$chat_id, $final_msg]);
 
     echo json_encode(["response" => $final_msg], JSON_UNESCAPED_UNICODE);
     exit;
 }
 
-// GPT-Funktion
 function askOpenAI(array $history, array $config) {
     $apiKey = $_ENV['OPENAI_API_KEY'];
     $endpoint = "https://api.openai.com/v1/chat/completions";
@@ -126,7 +114,7 @@ function askOpenAI(array $history, array $config) {
     $success = $config['success_condition'] ?? "Das Ziel ist vollständig erfüllt.";
     $role = $config['role'] ?? "Du bist ein Lern-Coach.";
 
-    $system_prompt = "$role Ziel: $goal. Stil: $style. Wenn das Ziel erreicht ist ($success), antworte mit folgendem JSON: { \"success\": true, \"message\": \"...\" }";
+    $system_prompt = "$role Ziel: $goal. Stil: $style. Wenn das Ziel erreicht ist ($success), antworte ausschließlich mit diesem JSON (ohne Einleitung oder Text davor): { \"success\": true, \"message\": \"...\" }";
 
     array_unshift($messages, [
         "role" => "system",
@@ -134,7 +122,7 @@ function askOpenAI(array $history, array $config) {
     ]);
 
     $data = [
-        "model" => "gpt-4.1-mini",
+        "model" => "gpt-4",
         "messages" => $messages,
         "temperature" => 0.7
     ];
@@ -151,12 +139,7 @@ function askOpenAI(array $history, array $config) {
 
     $response = curl_exec($ch);
     curl_close($ch);
-
-    // DEBUG:
-file_put_contents(__DIR__ . "/gpt_debug.json", $response);
     $result = json_decode($response, true);
-
-
 
     return $result["choices"][0]["message"]["content"] ?? "Ich konnte gerade keine Antwort generieren.";
 }
