@@ -21,11 +21,14 @@ if ($method === 'GET') {
         $chat_id = bin2hex(random_bytes(16));
         $pdo->prepare("INSERT INTO chats (id, user_id, lesson_id) VALUES (?, ?, ?)")->execute([$chat_id, $user_id, $lesson_id]);
 
-        $descStmt = $pdo->prepare("SELECT description FROM lessons WHERE id = ?");
-        $descStmt->execute([$lesson_id]);
-        $desc = $descStmt->fetchColumn();
-        $systemMsg = "In dieser Lektion: " . ($desc ?: "Lerneinheit starten.");
-        $pdo->prepare("INSERT INTO chat_messages (chat_id, sender, message) VALUES (?, 'system', ?)")->execute([$chat_id, $systemMsg]);
+        $lessonStmt = $pdo->prepare("SELECT chat_config FROM lessons WHERE id = ?");
+        $lessonStmt->execute([$lesson_id]);
+        $cfg = json_decode($lessonStmt->fetchColumn() ?? '{}', true);
+        
+        $assignment = $cfg['assignment'] ?? null;
+        $desc = $cfg['goal'] ?? null;
+        
+        $systemMsg = $assignment ?: ("In dieser Lektion: " . ($desc ?: "Lerneinheit starten."));
     } else {
         $chat_id = $chat['id'];
     }
