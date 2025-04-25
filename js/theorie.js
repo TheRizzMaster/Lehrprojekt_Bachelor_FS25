@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", async () => {
     const params = new URLSearchParams(window.location.search);
+    const moduleId = params.get("module_id");
     const lessonId = params.get("lesson_id");
     const titleEl = document.querySelector(".lesson-header h1");
     const subtitleEl = document.querySelector(".lesson-header .subtitle");
