@@ -79,24 +79,13 @@ document.addEventListener("DOMContentLoaded", async () => {
         const data = await res.json();
         hideTypingIndicator();
   
-        // Erfolg?
         if (data.success === true) {
-            // Antwort des AI
-            console.log(data);
-          try {
-            const result = JSON.parse(data.response);
-            if (data.success) {
-              appendMessage("ai", result.message);
-              disableInput();
-              showFinishButton();
-              return;
-            }
-          } catch {
+            appendMessage("ai", data.response);
+            disableInput();
+            showFinishButton();
+          } else {
             appendMessage("ai", data.response);
           }
-        } else {
-          appendMessage("ai", data.response);
-        }
       } catch (err) {
         hideTypingIndicator();
         appendMessage("ai", "Fehler beim Laden der Antwort.");
