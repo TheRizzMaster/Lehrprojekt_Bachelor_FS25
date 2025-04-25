@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
     chatButton.addEventListener("click", () => {
-      window.location.href = `./chat.html?lesson_id=${lessonId}`;
+      window.location.href = `./chat.html?module_id=${moduleId}&lesson_id=${lessonId}`;
     });
 
 });
