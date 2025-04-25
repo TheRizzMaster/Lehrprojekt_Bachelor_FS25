@@ -110,7 +110,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       btn.textContent = "Zur Selbsteinschätzung";
       btn.classList.add("next-button");
       btn.onclick = () => {
-        window.location.href = `./feedback.html?modul_id=${modulId}&lesson_id=${lessonId}`;
+        window.location.href = `./feedback.html?module_id=${modulId}&lesson_id=${lessonId}`;
       };
   
       wrapper.appendChild(btn);
