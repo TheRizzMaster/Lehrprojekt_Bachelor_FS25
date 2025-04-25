@@ -29,6 +29,7 @@ if ($method === 'GET') {
         $desc = $cfg['goal'] ?? null;
         
         $systemMsg = $assignment ?: ("In dieser Lektion: " . ($desc ?: "Lerneinheit starten."));
+        $pdo->prepare("INSERT INTO chat_messages (chat_id, sender, message) VALUES (?, 'system', ?)")->execute([$chat_id, $systemMsg]);
     } else {
         $chat_id = $chat['id'];
     }
