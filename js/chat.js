@@ -81,9 +81,11 @@ document.addEventListener("DOMContentLoaded", async () => {
   
         // Erfolg?
         if (data.success === true) {
+            // Antwort des AI
+            console.log(data);
           try {
             const result = JSON.parse(data.response);
-            if (result.success) {
+            if (data.success) {
               appendMessage("ai", result.message);
               disableInput();
               showFinishButton();
