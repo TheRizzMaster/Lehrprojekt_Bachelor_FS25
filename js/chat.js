@@ -107,10 +107,10 @@ document.addEventListener("DOMContentLoaded", async () => {
       wrapper.style.marginTop = "2rem";
   
       const btn = document.createElement("button");
-      btn.textContent = "Zur Roadmap zurück";
+      btn.textContent = "Zur Selbsteinschätzung";
       btn.classList.add("next-button");
       btn.onclick = () => {
-        window.location.href = `roadmap.html?modul_id=${modulId}`;
+        window.location.href = `./feedback.html?modul_id=${modulId}&lesson_id=${lessonId}`;
       };
   
       wrapper.appendChild(btn);
