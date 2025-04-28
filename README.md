@@ -1,6 +1,6 @@
 # Lernerfolge durch Selflearning – Nachhaltige Wissensvermittlung für Programmiersprachen
 
-![Bachelorarbeit 2025](https://img.shields.io/badge/Bachelorarbeit-2025-blue) ![Made with Brain](https://img.shields.io/badge/Made%20with-%F0%9F%96%8B%EF%B8%8F-brightgreen)
+![Bachelorarbeit 2025](https://img.shields.io/badge/Bachelorarbeit-2025-blue) ![Made with Brain](https://img.shields.io/badge/Made%20with%20%F0%9F%A7%A0-brightgreen)
 
 Willkommen zu meinem Bachelorprojekt an der Fachhochschule Graubünden im Studiengang **Multimedia Production**. Dieses Repository begleitet die Bachelorthesis und das Lehrprojekt mit dem Titel **"Lernerfolge durch Selflearning: Nachhaltige Wissensvermittlung für Programmiersprachen im digitalen Zeitalter"**.
 
