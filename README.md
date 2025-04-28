@@ -1,8 +1,8 @@
-# Lernerfolge durch Selflearning – Nachhaltige Wissensvermittlung für Programmiersprachen
+# Lernerfolge durch Selflearning – Nachhaltige Wissensvermittlung für Computational Thinking
 
 ![Bachelorarbeit 2025](https://img.shields.io/badge/Bachelorarbeit-2025-blue) ![Made with Brain](https://img.shields.io/badge/Made%20with%20%F0%9F%A7%A0-brightgreen)
 
-Willkommen zu meinem Bachelorprojekt an der Fachhochschule Graubünden im Studiengang **Multimedia Production**. Dieses Repository begleitet die Bachelorthesis und das Lehrprojekt mit dem Titel **"Lernerfolge durch Selflearning: Nachhaltige Wissensvermittlung für Programmiersprachen im digitalen Zeitalter"**.
+Willkommen zu meinem Bachelorprojekt an der Fachhochschule Graubünden im Studiengang **Multimedia Production**. Dieses Repository begleitet die Bachelorthesis und das Lehrprojekt mit dem Titel **"Lernerfolge durch Selflearning: Nachhaltige Wissensvermittlung für Computational Thinking im digitalen Zeitalter"**.
 
 ## 📚 Überblick
 
@@ -12,10 +12,10 @@ Die Arbeit untersucht, wie selbstgesteuertes Lernen (Selflearning) im digitalen 
 
 ## 🛠️ Tech-Stack
 
-- **Frontend:** HTML5, CSS3, JavaScript
+- **Frontend:** HTML, CSS, JavaScript
 - **Backend:** PHP
-- **Datenhaltung:** MySQL
-- **Prototypische Erweiterung:** Integration von KI-gestütztem Feedback
+- **Datenhaltung:** MySQL (MariaDB)
+- **Prototypische Erweiterung:** Integration von KI-gestütztem Dialog und Feedback (OpenAI API)
 - **Sonstiges:** A/B-Testing, UX-orientiertes Lernpfaddesign
 
 ## 🔧 Technische Schwerpunkte
