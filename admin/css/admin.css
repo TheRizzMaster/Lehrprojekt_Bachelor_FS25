@@ -1,0 +1,141 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 2rem;
+    background-color: #f8fafc;
+  }
+  
+  h1 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: #1a202c;
+  }
+  
+  .add-btn {
+    background-color: #5b21b6;
+    color: white;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+  
+  .list-item {
+    background: white;
+    padding: 1rem;
+    border-radius: 10px;
+    margin-bottom: 0.8rem;
+    border: 1px solid #e2e8f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .nested-item {
+    margin-left: 1.5rem;
+    background-color: #f1f5f9;
+  }
+  
+  .deep-item {
+    margin-left: 3rem;
+    background-color: #e5e7eb;
+  }
+  
+  .item-actions button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-left: 0.5rem;
+  }
+  
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  #modal-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    width: 600px;
+    max-width: 90%;
+  }
+  
+  .tabs {
+    display: flex;
+    margin-bottom: 1rem;
+    gap: 0.5rem;
+  }
+  
+  .tab-btn {
+    background-color: #e2e8f0;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border-radius: 6px;
+  }
+  
+  .tab-btn.active {
+    background-color: #5b21b6;
+    color: white;
+  }
+  
+  .tab-content.hidden {
+    display: none;
+  }
+  
+  label {
+    display: block;
+    margin-top: 1rem;
+    margin-bottom: 0.3rem;
+    color: #374151;
+  }
+  
+  input[type=\"text\"], textarea, select {
+    width: 100%;
+    padding: 0.6rem;
+    border-radius: 6px;
+    border: 1px solid #cbd5e0;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .primary-btn {
+    background-color: #3182ce;
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+  
+  .secondary-btn {
+    background-color: #edf2f7;
+    color: #2d3748;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    margin-left: 0.5rem;
+    cursor: pointer;
+  }
+  
+  .modal-actions {
+    margin-top: 1.2rem;
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .hidden {
+    display: none;
+  }
