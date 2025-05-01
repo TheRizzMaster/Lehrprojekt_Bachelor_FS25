@@ -1,6 +1,6 @@
 <?php
 // verify.php – Zugriffsschutz für Admins
-require_once __DIR__ . '/../bootstrap.php';
+require_once __DIR__ . '/../../bootstrap.php';
 
 $headers = getallheaders();
 $authHeader = $headers['Authorization'] ?? $headers['authorization'] ?? '';

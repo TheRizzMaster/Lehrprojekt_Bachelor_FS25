@@ -16,7 +16,8 @@
       .then(response => {
         if (!response.ok) {
           // If the response is not ok, redirect to the login page
-          window.location.href = '../login.html';
+          console.log(response)
+          //window.location.href = '../login.html';
         }
       })
       .catch(error => {

@@ -1,7 +1,7 @@
 <?php
 // admin_lesson.php
-require_once __DIR__ . '/../bootstrap.php';
-require_once __DIR__ . '/../auth/verify.php';
+require_once __DIR__ . '/../../bootstrap.php';
+require_once __DIR__ . '/../php/verify_admin.php';
 
 header('Content-Type: application/json');
 $method = $_SERVER['REQUEST_METHOD'];
