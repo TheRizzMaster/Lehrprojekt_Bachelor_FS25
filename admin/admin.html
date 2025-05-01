@@ -12,18 +12,19 @@
 
   <script>
     // make a http request to the verify_admin.php file and check if the user is logged in and a admin
-    fetch('./php/verify_admin.php')
-      .then(response => {
-        if (!response.ok) {
-          // If the response is not ok, redirect to the login page
-          console.log(response)
-          //window.location.href = '../login.html';
+    fetch("/admin/php/verify_admin.php", {
+        headers: {
+            Authorization: "Bearer " + localStorage.getItem("token")
         }
-      })
-      .catch(error => {
-        console.error('Error:', error);
-        // Handle error
-      });
+        })
+        .then(res => {
+        if (!res.ok) {
+            window.location.href = "/login.html";
+        }
+        })
+        .catch(() => {
+        window.location.href = "/login.html";
+        });
   </script>
 </head>
 <body>
