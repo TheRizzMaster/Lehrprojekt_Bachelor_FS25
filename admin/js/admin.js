@@ -110,7 +110,7 @@ modalForm.addEventListener("submit", async (e) => {
   if (parentId) payload.parent_id = parentId;
 
   const method = currentEditId ? "PUT" : "POST";
-  const url = `/api/admin_${currentEditType}.php${currentEditId ? `?id=${currentEditId}` : ""}`;
+  const url = `../api/admin_${currentEditType}.php${currentEditId ? `?id=${currentEditId}` : ""}`;
 
   await fetch(url, {
     method,
@@ -128,7 +128,7 @@ courseList.addEventListener("click", async (e) => {
   const type = e.target.dataset.type;
 
   if (e.target.classList.contains("edit-btn")) {
-    const res = await fetch(`/api/admin_${type}.php?id=${id}`);
+    const res = await fetch(`../api/admin_${type}.php?id=${id}`);
     const data = await res.json();
     openModal(type, id, data);
   }
@@ -143,7 +143,7 @@ courseList.addEventListener("click", async (e) => {
 });
 
 async function loadCourses() {
-  const res = await fetch("/api/admin_course.php");
+  const res = await fetch("../api/admin_course.php");
   const data = await res.json();
   courseList.innerHTML = "";
   data.forEach(course => {
@@ -161,7 +161,7 @@ async function loadCourses() {
 }
 
 async function loadModules(courseId) {
-  const res = await fetch(`/api/admin_module.php?course_id=${courseId}`);
+  const res = await fetch(`../api/admin_module.php?course_id=${courseId}`);
   const data = await res.json();
   const list = document.getElementById(`modules-${courseId}`);
   list.classList.toggle("hidden");
@@ -191,7 +191,7 @@ async function loadModules(courseId) {
       e.preventDefault();
       if (draggedItem !== el) {
         el.parentNode.insertBefore(draggedItem, el);
-        saveOrder(`/api/admin_module.php?action=reorder`, `#modules-${courseId}`);
+        saveOrder(`../api/admin_module.php?action=reorder`, `#modules-${courseId}`);
       }
     });
     list.appendChild(el);
@@ -199,7 +199,7 @@ async function loadModules(courseId) {
 }
 
 async function loadLessons(moduleId) {
-  const res = await fetch(`/api/admin_lesson.php?module_id=${moduleId}`);
+  const res = await fetch(`../api/admin_lesson.php?module_id=${moduleId}`);
   const data = await res.json();
   const list = document.getElementById(`lessons-${moduleId}`);
   list.classList.toggle("hidden");
@@ -226,7 +226,7 @@ async function loadLessons(moduleId) {
       e.preventDefault();
       if (draggedItem !== el) {
         el.parentNode.insertBefore(draggedItem, el);
-        saveOrder(`/api/admin_lesson.php?action=reorder`, `#lessons-${moduleId}`);
+        saveOrder(`../api/admin_lesson.php?action=reorder`, `#lessons-${moduleId}`);
       }
     });
     list.appendChild(el);
