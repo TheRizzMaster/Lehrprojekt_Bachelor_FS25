@@ -2,6 +2,13 @@
 
 let aceTheoryEditor, aceChatEditor, draggedItem = null;
 
+function authHeaders() {
+    return {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer " + localStorage.getItem("token")
+    };
+}
+
 const modal = document.getElementById("modal");
 const modalTitle = document.getElementById("modal-title");
 const modalForm = document.getElementById("modal-form");
@@ -114,7 +121,7 @@ modalForm.addEventListener("submit", async (e) => {
 
   await fetch(url, {
     method,
-    headers: { "Content-Type": "application/json" },
+    headers: authHeaders(),
     body: JSON.stringify(payload)
   });
   modal.classList.add("hidden");
@@ -128,7 +135,7 @@ courseList.addEventListener("click", async (e) => {
   const type = e.target.dataset.type;
 
   if (e.target.classList.contains("edit-btn")) {
-    const res = await fetch(`./php/admin_${type}.php?id=${id}`);
+    const res = await fetch(`./php/admin_${type}.php?id=${id}`, {headers: authHeaders()});
     const data = await res.json();
     openModal(type, id, data);
   }
@@ -143,7 +150,7 @@ courseList.addEventListener("click", async (e) => {
 });
 
 async function loadCourses() {
-  const res = await fetch("./php/admin_course.php");
+  const res = await fetch("./php/admin_course.php", {headers: authHeaders()});
   const data = await res.json();
   courseList.innerHTML = "";
   data.forEach(course => {
@@ -161,7 +168,7 @@ async function loadCourses() {
 }
 
 async function loadModules(courseId) {
-  const res = await fetch(`./php/admin_module.php?course_id=${courseId}`);
+  const res = await fetch(`./php/admin_module.php?course_id=${courseId}`, {headers: authHeaders()});
   const data = await res.json();
   const list = document.getElementById(`modules-${courseId}`);
   list.classList.toggle("hidden");
@@ -199,7 +206,7 @@ async function loadModules(courseId) {
 }
 
 async function loadLessons(moduleId) {
-  const res = await fetch(`./php/admin_lesson.php?module_id=${moduleId}`);
+  const res = await fetch(`./php/admin_lesson.php?module_id=${moduleId}`, {headers: authHeaders()});
   const data = await res.json();
   const list = document.getElementById(`lessons-${moduleId}`);
   list.classList.toggle("hidden");
@@ -238,7 +245,7 @@ async function saveOrder(endpoint, selector) {
   const order = Array.from(items).map((el, i) => ({ id: el.dataset.id, position: i + 1 }));
   await fetch(endpoint, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: authHeaders(),
     body: JSON.stringify({ order })
   });
 }
