@@ -1,5 +1,7 @@
 // admin.js – final version mit Drag & Drop, Modal-Tabs, JSON-Validation
 
+document.addEventListener("DOMContentLoaded", () => {
+
 let aceTheoryEditor, aceChatEditor, draggedItem = null;
 
 function authHeaders() {
@@ -251,3 +253,5 @@ async function saveOrder(endpoint, selector) {
 }
 
 loadCourses();
+
+});
