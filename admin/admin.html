@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="de-CH">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin-Panel | Kurse, Module & Lektionen verwalten</title>
+  <link rel="stylesheet" href="./css/global.css">
+  <link rel="stylesheet" href="./css/admin.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/ace-builds@1.40.1/src-noconflict/snippets/python.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ace-builds@1.40.1/css/ace.min.css">
+
+  <script>
+    // make a http request to the verify_admin.php file and check if the user is logged in and a admin
+    fetch('./php/verify_admin.php')
+      .then(response => {
+        if (!response.ok) {
+          // If the response is not ok, redirect to the login page
+          window.location.href = './login.html';
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        // Handle error
+      });
+  </script>
+</head>
+<body>
+
+  <main>
+    <h1>Admin-Panel</h1>
+    <button id="add-course-btn" class="add-btn">➕ Neuer Kurs</button>
+    <div id="course-list" class="list"></div>
+  </main>
+
+  <!-- Modal -->
+  <div id="modal" class="modal hidden">
+    <div id="modal-content">
+      <h2 id="modal-title">Modal Titel</h2>
+      <form id="modal-form">
+        <!-- Dynamisch generierte Felder -->
+      </form>
+      <div class="modal-actions">
+        <button type="submit" form="modal-form" class="primary-btn">Speichern</button>
+        <button type="button" id="modal-cancel-btn" class="secondary-btn">Abbrechen</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="./js/admin.js"></script>
+</body>
+</html>
