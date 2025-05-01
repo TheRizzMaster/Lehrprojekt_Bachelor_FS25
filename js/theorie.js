@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         card.appendChild(ul);
       } else if (block.type === "image") {
         const img = document.createElement("img");
-        img.src = block.src;
+        img.src = block.url;
         img.alt = block.alt || "";
         img.classList.add("theory-image");
         card.appendChild(img);
