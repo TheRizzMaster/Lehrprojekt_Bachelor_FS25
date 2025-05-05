@@ -71,6 +71,8 @@ main {
     padding: 1.5rem;
     box-shadow: 0 4px 12px rgba(0,0,0,0.06);
     position: relative;
+    min-height: 180px;
+    transition: 0.3s ease;
   }
   
   .grid-item h3 {
