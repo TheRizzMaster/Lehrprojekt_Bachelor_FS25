@@ -108,3 +108,16 @@ ALTER TABLE `chat_messages` ADD FOREIGN KEY (`chat_id`) REFERENCES `chats` (`id`
 ALTER TABLE `module_feedback` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 ALTER TABLE `module_feedback` ADD FOREIGN KEY (`module_id`) REFERENCES `modules` (`id`);
+
+
+CREATE TABLE plattform_feedback (
+  id CHAR(36) PRIMARY KEY,
+  user_id CHAR(36) NOT NULL,
+  helpful ENUM('yes', 'no') NOT NULL,
+  reasons TEXT,
+  improved TEXT,
+  learn_effective TEXT,
+  general_feedback TEXT,
+  submitted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES users(id)
+);

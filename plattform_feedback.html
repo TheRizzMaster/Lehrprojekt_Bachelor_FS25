@@ -1,0 +1,60 @@
+<!-- feedback_platform.html -->
+<!DOCTYPE html>
+<html lang="de-CH">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plattform Feedback</title>
+  <link rel="stylesheet" href="./css/global.css">
+</head>
+<body>
+  <main class="container">
+    <h1>Feedback zur Lernplattform</h1>
+    <form id="platform-feedback-form">
+
+      <section>
+        <h2>Lernverhalten und -erleben</h2>
+        <label>1. Konzentration:<input type="range" name="q1" min="1" max="6" required></label>
+        <label>2. Verständnis:<input type="range" name="q2" min="1" max="6" required></label>
+        <label>3. Transfer:<input type="range" name="q3" min="1" max="6" required></label>
+        <label>4. Selbstständigkeit:<input type="range" name="q4" min="1" max="6" required></label>
+        <label>5. Erinnerungswert:<input type="range" name="q5" min="1" max="6" required></label>
+      </section>
+
+      <section>
+        <h2>Plattform-Nutzung</h2>
+        <label>6. Übersichtlichkeit:<input type="range" name="q6" min="1" max="6" required></label>
+        <label>7. Navigation:<input type="range" name="q7" min="1" max="6" required></label>
+        <label>8. Nachvollziehbarkeit:<input type="range" name="q8" min="1" max="6" required></label>
+        <label>9. Aufgabenverständnis:<input type="range" name="q9" min="1" max="6" required></label>
+      </section>
+
+      <section>
+        <h2>Erleben der KI-Interaktion</h2>
+        <label>10. Unterstützung:<input type="range" name="q10" min="1" max="6" required></label>
+        <label>11. Denkförderung:<input type="range" name="q11" min="1" max="6" required></label>
+        <label>12. Motivation:<input type="range" name="q12" min="1" max="6" required></label>
+        <label>13. Verständnis:<input type="range" name="q13" min="1" max="6" required></label>
+        <label>14. Fehlererkennung:<input type="range" name="q14" min="1" max="6" required></label>
+      </section>
+
+      <section>
+        <h2>Subjektive Einschätzung</h2>
+        <label>15. Lernfortschritt:<input type="range" name="q15" min="1" max="6" required></label>
+        <label>16. Weiterempfehlung:<input type="range" name="q16" min="1" max="6" required></label>
+      </section>
+
+      <section>
+        <h2>Freitext</h2>
+        <label>Was hat dir gefallen?<textarea name="positive"></textarea></label>
+        <label>Was kann besser werden?<textarea name="suggestions"></textarea></label>
+        <label>Letzte Gedanken?<textarea name="comments"></textarea></label>
+      </section>
+
+      <button type="submit">Absenden</button>
+    </form>
+  </main>
+
+  <script src="./js/platform_feedback.js" defer></script>
+</body>
+</html>
