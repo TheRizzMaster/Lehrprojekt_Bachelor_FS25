@@ -87,7 +87,7 @@ body {
   }
 
   /* Slider-Stil */
-  .slider-wrapper input[type="range"] {
+  input[type="range"] {
     -webkit-appearance: none;
     appearance: none;
     width: 100%;
@@ -99,7 +99,7 @@ body {
   }
   
   /* Slider Daumen (Webkit & Firefox) */
-  .slider-wrapper input[type="range"]::-webkit-slider-thumb {
+  input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
     width: 16px;
@@ -110,7 +110,7 @@ body {
     border: none;
   }
   
-  .slider-wrapper input[type="range"]::-moz-range-thumb {
+  input[type="range"]::-moz-range-thumb {
     width: 16px;
     height: 16px;
     background: #3182ce;
