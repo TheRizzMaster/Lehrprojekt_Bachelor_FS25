@@ -100,6 +100,18 @@ document.addEventListener("DOMContentLoaded", async () => {
         </button>
       `;
       moduleGrid.appendChild(quizCard);
+
+      // Plattform-Feedback (feedback.html) als letzter Punkt
+      const feedbackCard = document.createElement("div");
+      feedbackCard.classList.add("grid-item", "feedback-card");
+      feedbackCard.innerHTML = `
+        <h3>Plattform-Feedback</h3>
+        <p class="status">Feedback geben</p>
+        <button class="action-btn primary" onclick="window.location.href='feedback.html'">
+          Feedback geben
+        </button>
+      `;
+      moduleGrid.appendChild(feedbackCard);
   
       courseWrapper.appendChild(moduleGrid);
       grid.appendChild(courseWrapper);
