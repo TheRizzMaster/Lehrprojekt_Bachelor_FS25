@@ -26,12 +26,12 @@ document.getElementById("quiz-form").addEventListener("submit", async function (
         if(result.success) {
           alert("Quiz erfolgreich eingereicht!");
         } else {
-            alert("Quiz nicht erfolgreich eingereicht: " + result.error);
+            alert("Quiz nicht erfolgreich eingereicht: " + result.message);
         }
         // alert(`Dein Ergebnis: ${result.score} von 16 Punkten`);
         // window.location.href = "./dashboard.html"; // oder eine andere Seite
       } else {
-        alert("Fehler: " + (result.error || "Unbekannter Fehler"));
+        alert("Fehler: " + (result.message || "Unbekannter Fehler"));
       }
     } catch (err) {
       console.error("Fehler beim Senden:", err);
