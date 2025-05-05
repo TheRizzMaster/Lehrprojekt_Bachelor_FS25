@@ -14,24 +14,24 @@ if (!$data) {
 // Mapping A–D → 1–4
 $answerMap = ['a' => 1, 'b' => 2, 'c' => 3, 'd' => 4];
 
-// Korrekte Antworten
+// Korrekte Antworten basierend auf aktualisierter HTML-Reihenfolge:
 $correct = [
-    1 => 3,  // Beispiel: c
-    2 => 2,
-    3 => 4,
-    4 => 1,
-    5 => 3,
-    6 => 2,
-    7 => 1,
-    8 => 3,
-    9 => 2,
-    10 => 4,
-    11 => 2,
-    12 => 3,
-    13 => 1,
-    14 => 4,
-    15 => 2,
-    16 => 1,
+    1 => 3,  // q1 → c
+    2 => 4,  // q2 → d
+    3 => 4,  // q3 → d
+    4 => 2,  // q4 → b
+    5 => 2,  // q5 → b
+    6 => 1,  // q6 → a
+    7 => 3,  // q7 → c
+    8 => 4,  // q8 → d
+    9 => 1,  // q9 → a
+    10 => 2, // q10 → b
+    11 => 3, // q11 → c
+    12 => 2, // q12 → b
+    13 => 1, // q13 → a
+    14 => 1, // q14 → a
+    15 => 1, // q15 → a
+    16 => 4  // q16 → d
 ];
 
 // Eingaben überprüfen und umwandeln
