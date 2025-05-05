@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   
     const titleEl = document.getElementById("lesson-titel");
     const subtitleEl = document.getElementById("lesson-subtitle");
+    const webTitle = document.querySelector("title");
   
     let chatId = null;
   
@@ -19,6 +20,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       });
       const data = await res.json();
       titleEl.textContent = data.title;
+      webTitle.textContent = data.title;
       subtitleEl.textContent = data.description;
     }
   

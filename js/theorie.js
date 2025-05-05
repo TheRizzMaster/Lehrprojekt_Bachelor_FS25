@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const subtitleEl = document.querySelector(".lesson-header .subtitle");
     const card = document.querySelector(".lesson-card");
     const chatButton = document.querySelector("#chat-button");
+    const webTitle = document.querySelector("title");
   
     if (!lessonId) {
       titleEl.textContent = "Fehler";
@@ -24,11 +25,13 @@ document.addEventListener("DOMContentLoaded", async () => {
   
     if (!res.ok) {
       titleEl.textContent = "Fehler";
+      webTitle.textContent = "Fehler";
       card.innerHTML = `<p>${data.error}</p>`;
       return;
     }
   
     titleEl.textContent = data.title;
+    webTitle.textContent = data.title;
     subtitleEl.textContent = data.description;
     card.innerHTML = "<h2>Theorie</h2>";
   
