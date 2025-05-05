@@ -88,6 +88,18 @@ document.addEventListener("DOMContentLoaded", async () => {
   
         moduleGrid.appendChild(card);
       });
+
+      // Abschlussquiz (quiz.html) als letzter Punkt
+      const quizCard = document.createElement("div");
+      quizCard.classList.add("grid-item", "quiz-card");
+      quizCard.innerHTML = `
+        <h3>Abschlussquiz</h3>
+        <p class="status">Quiz verfügbar</p>
+        <button class="action-btn primary" onclick="window.location.href='quiz.html'">
+          Quiz starten
+        </button>
+      `;
+      moduleGrid.appendChild(quizCard);
   
       courseWrapper.appendChild(moduleGrid);
       grid.appendChild(courseWrapper);
