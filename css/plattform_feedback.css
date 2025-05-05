@@ -86,56 +86,35 @@ body {
     text-align: center;
   }
 
-  /* Schönerer Slider */
-input[type="range"] {
+  /* Slider-Stil */
+  .slider-wrapper input[type="range"] {
     -webkit-appearance: none;
+    appearance: none;
     width: 100%;
-    height: 8px;
-    border-radius: 5px;
-    background: #e2e8f0;
+    height: 6px;
+    border-radius: 3px;
+    background: linear-gradient(to right, #3182ce 0%, #3182ce 50%, #e2e8f0 50%, #e2e8f0 100%);
     outline: none;
-    transition: background 0.3s;
+    transition: background 450ms ease-in;
   }
   
-  input[type="range"]::-webkit-slider-thumb {
+  /* Slider Daumen (Webkit & Firefox) */
+  .slider-wrapper input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
-    height: 20px;
-    width: 20px;
-    border-radius: 50%;
+    appearance: none;
+    width: 16px;
+    height: 16px;
     background: #3182ce;
-    cursor: pointer;
-    transition: background 0.3s ease;
-    box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
-    margin-top: -6px;
-  }
-  
-  input[type="range"]::-moz-range-thumb {
-    height: 20px;
-    width: 20px;
     border-radius: 50%;
-    background: #3182ce;
     cursor: pointer;
     border: none;
-    box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
   }
   
-  input[type="range"]:hover::-webkit-slider-thumb {
-    background: #2b6cb0;
-  }
-  
-  input[type="range"]:focus::-webkit-slider-thumb {
-    box-shadow: 0 0 0 4px rgba(49, 130, 206, 0.3);
-  }
-  
-  /* Aktiver Bereich einfärben */
-  input[type="range"]::-webkit-slider-runnable-track {
-    height: 8px;
-    background: linear-gradient(to right, #3182ce var(--val, 0%), #e2e8f0 var(--val, 0%));
-    border-radius: 5px;
-  }
-  
-  input[type="range"]::-moz-range-track {
-    height: 8px;
-    background: #e2e8f0;
-    border-radius: 5px;
+  .slider-wrapper input[type="range"]::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    background: #3182ce;
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
   }
