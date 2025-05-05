@@ -69,3 +69,23 @@ body {
   button[type="submit"]:hover {
     background-color: #2b6cb0;
   }
+
+  .question-block label {
+    display: block;
+    margin: 0.4rem 0;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #cbd5e0;
+    border-radius: 6px;
+    background-color: #f9fafb;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .question-block label:hover {
+    background-color: #edf2f7;
+  }
+  
+  .question-block input[type="radio"] {
+    margin-right: 0.5rem;
+    accent-color: #3182ce;
+  }
