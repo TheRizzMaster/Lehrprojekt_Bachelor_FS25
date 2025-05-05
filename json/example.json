@@ -1,27 +1,8 @@
 {
-    "meta": {
-        "exercise_id": "ABC-123-UBG",
-        "exercise": "Dekomposition für Anfänger",
-        "Module": "Dekomposition"
-    },
-    "theory": [
-        {
-            "kapitel": "Von Anfang an",
-            "content": "Lorem Ipsum..."
-        },
-        {
-            "kapitel": "Medium ist Medium",
-            "content": "Lorem Ipsum..."
-        },
-        {
-            "kapitel": "Das beste kommt zum Schluss",
-            "content": "Lorem Ipsum..."
-        }
-        
-    ],
-    "exercises": [
-        {},
-        {},
-        {}
-    ]
+  "phase": "decomposition",
+  "goal": "Der Lernende soll lernen, wie sich eine technische Anwendung – wie ein Taschenrechner – in Teilfunktionen zerlegen lässt.",
+  "assignment": "Bespreche mit der KI, wie man die Funktionalität eines Taschenrechners in Teilfunktionen aufteilen würde. Denke daran: Welche einzelnen Dinge muss der Rechner tun können?",
+  "style": "Hilf dem Lernenden durch gezielte Rückfragen wie \"Was passiert zuerst?\", \"Was muss das System wissen oder speichern?\", \"Wie reagiert es auf Eingaben?\".",
+  "success_condition": "Der Lernende beschreibt mindestens drei sinnvolle Teilfunktionen wie Eingabe, Rechenlogik und Ergebnisanzeige.",
+  "role": "Du bist ein strukturierter Coach, der beim logischen Denken und Schrittfolgen unterstützt. Du hilfst der Person, gibst aber keine Lösungen. Wenn nach einem Beispiel gefragt wird, darfst du ein Beispiel geben, welches aber nicht mit dem Beispiel der Aufgabe zusammenhängt. Sei ermutigend und geduldig. Versuche das Beste aus der Person zu holen. Stelle bei Verständnisproblemen Rückfragen, bevor du neue Impulse gibst."
 }
