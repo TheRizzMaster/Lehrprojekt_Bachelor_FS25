@@ -17,7 +17,7 @@ document.getElementById("quiz-form").addEventListener("submit", async function (
           "Content-Type": "application/json",
           "Authorization": "Bearer " + localStorage.getItem("token")
         },
-        body: JSON.stringify({ answers })
+        body: JSON.stringify(answers)
       });
   
       const result = await res.json();
