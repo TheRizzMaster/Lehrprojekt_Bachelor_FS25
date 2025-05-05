@@ -7,6 +7,8 @@ document.getElementById("quiz-form").addEventListener("submit", async function (
     for (let [name, value] of formData.entries()) {
       answers[name] = value;
     }
+
+    console.log(answers);
   
     try {
       const res = await fetch("./api/submit_quiz.php", {
