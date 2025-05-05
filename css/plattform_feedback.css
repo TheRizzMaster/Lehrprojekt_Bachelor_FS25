@@ -1,0 +1,87 @@
+/* css/plattform-feedback.css */
+
+body {
+    font-family: system-ui, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f7fafc;
+  }
+  
+  main {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  }
+  
+  h1 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+  
+  form label {
+    font-weight: 600;
+    display: block;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  input[type="text"],
+  textarea,
+  select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #cbd5e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+  }
+  
+  input[type="text"]:focus,
+  textarea:focus,
+  select:focus {
+    border-color: #3182ce;
+    outline: none;
+  }
+  
+  textarea {
+    min-height: 100px;
+    resize: vertical;
+  }
+  
+  .radio-group {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 0.5rem;
+  }
+  
+  .radio-group label {
+    font-weight: normal;
+  }
+  
+  button[type="submit"] {
+    margin-top: 2rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    background-color: #3182ce;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #2b6cb0;
+  }
+  
+  .success-message {
+    margin-top: 2rem;
+    padding: 1rem;
+    background-color: #c6f6d5;
+    color: #22543d;
+    border-radius: 8px;
+    text-align: center;
+  }
