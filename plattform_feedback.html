@@ -11,39 +11,88 @@
 <body>
   <main class="container">
     <h1>Feedback zur Lernplattform</h1>
+    <p></p>
     <form id="plattform-feedback-form">
 
       <section>
         <h2>Lernverhalten und -erleben</h2>
-        <label>1. Konzentration:<input type="range" name="q1" min="1" max="6" required></label>
-        <label>2. Verständnis:<input type="range" name="q2" min="1" max="6" required></label>
-        <label>3. Transfer:<input type="range" name="q3" min="1" max="6" required></label>
-        <label>4. Selbstständigkeit:<input type="range" name="q4" min="1" max="6" required></label>
-        <label>5. Erinnerungswert:<input type="range" name="q5" min="1" max="6" required></label>
-      </section>
+        <div class="slider-question">
+            <label>1. Konzentration:<input type="range" name="q1" min="1" max="6" required></label>
+            <div class="slider-scale"><span>schlecht konzentriert</span><span>sehr konzentriert</span></div>
+        </div>
+        <div class="slider-question">
+            <label>2. Verständnis:<input type="range" name="q2" min="1" max="6" required></label>
+            <div class="slider-scale"><span>wenig verstanden</span><span>alles verstanden</span></div>
+        </div>
+        <div class="slider-question">
+            <label>3. Transfer:<input type="range" name="q3" min="1" max="6" required></label>
+            <div class="slider-scale"><span>kaum übertragbar</span><span>leicht übertragbar</span></div>
+        </div>
+        <div class="slider-question">
+            <label>4. Selbstständigkeit:<input type="range" name="q4" min="1" max="6" required></label>
+            <div class="slider-scale"><span>stark angewiesen</span><span>komplett selbstständig</span></div>
+        </div>
+        <div class="slider-question">
+            <label>5. Erinnerungswert:<input type="range" name="q5" min="1" max="6" required></label>
+            <div class="slider-scale"><span>schnell vergessen</span><span>bleibt im Kopf</span></div>
+        </div>
+        </section>
 
-      <section>
+        <section>
         <h2>Plattform-Nutzung</h2>
-        <label>6. Übersichtlichkeit:<input type="range" name="q6" min="1" max="6" required></label>
-        <label>7. Navigation:<input type="range" name="q7" min="1" max="6" required></label>
-        <label>8. Nachvollziehbarkeit:<input type="range" name="q8" min="1" max="6" required></label>
-        <label>9. Aufgabenverständnis:<input type="range" name="q9" min="1" max="6" required></label>
-      </section>
+        <div class="slider-question">
+            <label>6. Übersichtlichkeit:<input type="range" name="q6" min="1" max="6" required></label>
+            <div class="slider-scale"><span>verwirrend</span><span>sehr klar strukturiert</span></div>
+        </div>
+        <div class="slider-question">
+            <label>7. Navigation:<input type="range" name="q7" min="1" max="6" required></label>
+            <div class="slider-scale"><span>kompliziert</span><span>intuitiv</span></div>
+        </div>
+        <div class="slider-question">
+            <label>8. Nachvollziehbarkeit:<input type="range" name="q8" min="1" max="6" required></label>
+            <div class="slider-scale"><span>schwer verständlich</span><span>vollständig klar</span></div>
+        </div>
+        <div class="slider-question">
+            <label>9. Aufgabenverständnis:<input type="range" name="q9" min="1" max="6" required></label>
+            <div class="slider-scale"><span>unklar</span><span>sofort verständlich</span></div>
+        </div>
+        </section>
 
-      <section>
+        <section>
         <h2>Erleben der KI-Interaktion</h2>
-        <label>10. Unterstützung:<input type="range" name="q10" min="1" max="6" required></label>
-        <label>11. Denkförderung:<input type="range" name="q11" min="1" max="6" required></label>
-        <label>12. Motivation:<input type="range" name="q12" min="1" max="6" required></label>
-        <label>13. Verständnis:<input type="range" name="q13" min="1" max="6" required></label>
-        <label>14. Fehlererkennung:<input type="range" name="q14" min="1" max="6" required></label>
-      </section>
+        <div class="slider-question">
+            <label>10. Unterstützung:<input type="range" name="q10" min="1" max="6" required></label>
+            <div class="slider-scale"><span>nicht hilfreich</span><span>sehr hilfreich</span></div>
+        </div>
+        <div class="slider-question">
+            <label>11. Denkförderung:<input type="range" name="q11" min="1" max="6" required></label>
+            <div class="slider-scale"><span>keine Anregung</span><span>stark angeregt</span></div>
+        </div>
+        <div class="slider-question">
+            <label>12. Motivation:<input type="range" name="q12" min="1" max="6" required></label>
+            <div class="slider-scale"><span>demotivierend</span><span>sehr motivierend</span></div>
+        </div>
+        <div class="slider-question">
+            <label>13. Verständnis:<input type="range" name="q13" min="1" max="6" required></label>
+            <div class="slider-scale"><span>kaum geholfen</span><span>klar verbessert</span></div>
+        </div>
+        <div class="slider-question">
+            <label>14. Fehlererkennung:<input type="range" name="q14" min="1" max="6" required></label>
+            <div class="slider-scale"><span>keine erkannt</span><span>alle erkannt</span></div>
+        </div>
+        </section>
 
-      <section>
+        <section>
         <h2>Subjektive Einschätzung</h2>
-        <label>15. Lernfortschritt:<input type="range" name="q15" min="1" max="6" required></label>
-        <label>16. Weiterempfehlung:<input type="range" name="q16" min="1" max="6" required></label>
-      </section>
+        <div class="slider-question">
+            <label>15. Lernfortschritt:<input type="range" name="q15" min="1" max="6" required></label>
+            <div class="slider-scale"><span>keiner</span><span>sehr hoch</span></div>
+        </div>
+        <div class="slider-question">
+            <label>16. Weiterempfehlung:<input type="range" name="q16" min="1" max="6" required></label>
+            <div class="slider-scale"><span>auf keinen Fall</span><span>unbedingt</span></div>
+        </div>
+        </section>
 
       <section>
         <h2>Freitext</h2>
