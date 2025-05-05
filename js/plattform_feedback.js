@@ -1,38 +1,34 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const form = document.getElementById("plattform-feedback-form");
+document.getElementById("plattform-feedback-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
   
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
+    const form = e.target;
+    const token = localStorage.getItem("token");
   
-      const token = localStorage.getItem("token");
-      const formData = new FormData(form);
+    const payload = {};
+    for (let i = 1; i <= 16; i++) {
+      payload[`q${i}`] = Number(form[`q${i}`].value);
+    }
   
-      const payload = {
-        helpful: formData.get("helpful"),
-        reasons: formData.get("reasons"),
-        improved: formData.get("improved"),
-        learn_effective: formData.get("learn_effective"),
-        general_feedback: formData.get("general_feedback")
-      };
+    payload.positive = form.positive.value.trim();
+    payload.suggestions = form.suggestions.value.trim();
+    payload.comments = form.comments.value.trim();
   
-      const res = await fetch("/api/plattform_feedback.php", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": "Bearer " + token
-        },
-        body: JSON.stringify(payload)
-      });
-  
-      if (res.ok) {
-        alert("Vielen Dank für dein Feedback!");
-        window.location.href = "/dashboard.html";
-      } else {
-        alert("Fehler beim Speichern des Feedbacks.");
-      }
+    const res = await fetch("/api/submit_platform_feedback.php", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + token
+      },
+      body: JSON.stringify(payload)
     });
-
-
+  
+    const result = await res.json();
+    if (result.success) {
+      alert("Danke für dein Feedback!");
+      window.location.href = "/dashboard.html";
+    } else {
+      alert("Fehler: " + (result.error || "Unbekannter Fehler"));
+    }
   });
 
   const sliders = document.querySelectorAll('input[type="range"]');

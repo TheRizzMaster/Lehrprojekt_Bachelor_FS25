@@ -110,14 +110,16 @@ ALTER TABLE `module_feedback` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`i
 ALTER TABLE `module_feedback` ADD FOREIGN KEY (`module_id`) REFERENCES `modules` (`id`);
 
 
-CREATE TABLE plattform_feedback (
-  id CHAR(36) PRIMARY KEY,
+CREATE TABLE platform_feedback (
+  id CHAR(36) PRIMARY KEY DEFAULT (UUID()),
   user_id CHAR(36) NOT NULL,
-  helpful ENUM('yes', 'no') NOT NULL,
-  reasons TEXT,
-  improved TEXT,
-  learn_effective TEXT,
-  general_feedback TEXT,
   submitted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  q1 TINYINT, q2 TINYINT, q3 TINYINT, q4 TINYINT, q5 TINYINT,
+  q6 TINYINT, q7 TINYINT, q8 TINYINT, q9 TINYINT, q10 TINYINT,
+  q11 TINYINT, q12 TINYINT, q13 TINYINT, q14 TINYINT,
+  q15 TINYINT, q16 TINYINT,
+  positive TEXT,
+  suggestions TEXT,
+  comments TEXT,
   FOREIGN KEY (user_id) REFERENCES users(id)
 );

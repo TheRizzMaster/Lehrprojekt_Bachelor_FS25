@@ -3,39 +3,33 @@ require_once __DIR__ . '/../bootstrap.php';
 require_once __DIR__ . '/../auth/verify.php';
 
 header('Content-Type: application/json');
+$data = json_decode(file_get_contents("php://input"), true);
 
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-  http_response_code(405);
-  echo json_encode(['error' => 'Nur POST erlaubt']);
-  exit;
+if (!$user_id) {
+    echo json_encode(["success" => false, "error" => "Token fehlt oder ungültig"]);
+    exit;
 }
 
-$data = json_decode(file_get_contents('php://input'), true);
-
-$helpful = $data['helpful'] ?? null;
-$reasons = $data['reasons'] ?? null;
-$improved = $data['improved'] ?? null;
-$learn_effective = $data['learn_effective'] ?? null;
-$general_feedback = $data['general_feedback'] ?? null;
-
-if (!$helpful || !$learn_effective) {
-  http_response_code(400);
-  echo json_encode(['error' => 'Pflichtfelder fehlen']);
-  exit;
+$values = [];
+for ($i = 1; $i <= 16; $i++) {
+    $values["q$i"] = isset($data["q$i"]) ? intval($data["q$i"]) : null;
 }
 
-$stmt = $pdo->prepare("INSERT INTO plattform_feedback (
-    id, user_id, helpful, reasons, improved, learn_effective, general_feedback
-) VALUES (
-    UUID(), ?, ?, ?, ?, ?, ?
-)");
-$stmt->execute([
-  $user_id,
-  $helpful,
-  $reasons,
-  $improved,
-  $learn_effective,
-  $general_feedback
+$positive = $data["positive"] ?? null;
+$suggestions = $data["suggestions"] ?? null;
+$comments = $data["comments"] ?? null;
+
+$sql = "INSERT INTO platform_feedback (id, user_id, " .
+       implode(", ", array_keys($values)) . ", positive, suggestions, comments)
+        VALUES (UUID(), ?, " . rtrim(str_repeat("?, ", count($values)), ", ") . ", ?, ?, ?)";
+
+$stmt = $pdo->prepare($sql);
+$success = $stmt->execute([
+    $user_id,
+    ...array_values($values),
+    $positive,
+    $suggestions,
+    $comments
 ]);
 
-echo json_encode(['success' => true]);
+echo json_encode(["success" => $success]);
