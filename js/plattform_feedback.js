@@ -32,12 +32,18 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    document.querySelectorAll('input[type="range"]').forEach(slider => {
-        function updateSliderBg() {
-          const val = (slider.value - slider.min) / (slider.max - slider.min) * 100;
-          slider.style.setProperty("--val", `${val}%`);
-        }
-        updateSliderBg();
-        slider.addEventListener("input", updateSliderBg);
-      });
+    const sliders = document.querySelectorAll('input[type="range"]');
+
+    sliders.forEach(slider => {
+    function updateBackground(el) {
+        const val = (el.value - el.min) / (el.max - el.min) * 100;
+        el.style.background = `linear-gradient(to right, #3182ce 0%, #3182ce ${val}%, #e2e8f0 ${val}%, #e2e8f0 100%)`;
+    }
+    
+    updateBackground(slider);
+    
+    slider.addEventListener('input', () => {
+        updateBackground(slider);
+    });
+    });
   });
