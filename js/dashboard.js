@@ -94,7 +94,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       quizCard.classList.add("grid-item", "quiz-card");
       quizCard.innerHTML = `
         <h3>Abschlussquiz</h3>
-        <p class="status">Quiz verfügbar</p>
+        <p class="status">Fülle nach Abschluss aller Module oder ablauf der Stunde das Quiz aus und das darauf folgende Feedbackformular</p>
         <button class="action-btn primary" onclick="window.location.href='quiz.html'">
           Quiz starten
         </button>
@@ -102,16 +102,16 @@ document.addEventListener("DOMContentLoaded", async () => {
       moduleGrid.appendChild(quizCard);
 
       // Plattform-Feedback (feedback.html) als letzter Punkt
-      const feedbackCard = document.createElement("div");
-      feedbackCard.classList.add("grid-item", "feedback-card");
-      feedbackCard.innerHTML = `
-        <h3>Plattform-Feedback</h3>
-        <p class="status">Feedback geben</p>
-        <button class="action-btn primary" onclick="window.location.href='feedback.html'">
-          Feedback geben
-        </button>
-      `;
-      moduleGrid.appendChild(feedbackCard);
+      // const feedbackCard = document.createElement("div");
+      // feedbackCard.classList.add("grid-item", "feedback-card");
+      // feedbackCard.innerHTML = `
+      //   <h3>Plattform-Feedback</h3>
+      //   <p class="status">Feedback geben</p>
+      //   <button class="action-btn primary" onclick="window.location.href='feedback.html'">
+      //     Feedback geben
+      //   </button>
+      // `;
+      // moduleGrid.appendChild(feedbackCard);
   
       courseWrapper.appendChild(moduleGrid);
       grid.appendChild(courseWrapper);

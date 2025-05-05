@@ -24,7 +24,8 @@ document.getElementById("quiz-form").addEventListener("submit", async function (
   
       if (res.ok) {
         if(result.success) {
-          alert("Quiz erfolgreich eingereicht!");
+            alert("Quiz erfolgreich eingereicht!");
+            window.location.href = "./plattform_feedback.html"; // oder eine andere Seite
         } else {
             alert("Quiz nicht erfolgreich eingereicht: " + result.message);
         }
