@@ -31,4 +31,13 @@ document.addEventListener("DOMContentLoaded", () => {
         alert("Fehler beim Speichern des Feedbacks.");
       }
     });
+
+    document.querySelectorAll('input[type="range"]').forEach(slider => {
+        function updateSliderBg() {
+          const val = (slider.value - slider.min) / (slider.max - slider.min) * 100;
+          slider.style.setProperty("--val", `${val}%`);
+        }
+        updateSliderBg();
+        slider.addEventListener("input", updateSliderBg);
+      });
   });
