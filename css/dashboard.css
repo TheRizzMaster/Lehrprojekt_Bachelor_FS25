@@ -12,6 +12,11 @@ header {
     padding: 15px;
 }
 
+header div {
+    display: flex;
+    align-items: center;
+}
+
 header h1 {
     font-size: 32px;
     color: #1E293B;
