@@ -104,6 +104,7 @@ body {
     appearance: none;
     width: 16px;
     height: 16px;
+    background: #3182ce;
     border-radius: 50%;
     cursor: pointer;
     border: none;
@@ -112,6 +113,7 @@ body {
   input[type="range"]::-moz-range-thumb {
     width: 16px;
     height: 16px;
+    background: #3182ce;
     border-radius: 50%;
     cursor: pointer;
     border: none;
