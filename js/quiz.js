@@ -23,8 +23,13 @@ document.getElementById("quiz-form").addEventListener("submit", async function (
       const result = await res.json();
   
       if (res.ok) {
-        alert(`Dein Ergebnis: ${result.score} von 16 Punkten`);
-        window.location.href = "./dashboard.html"; // oder eine andere Seite
+        if(result.success) {
+          alert("Quiz erfolgreich eingereicht!");
+        } else {
+            alert("Quiz nicht erfolgreich eingereicht: " + result.error);
+        }
+        // alert(`Dein Ergebnis: ${result.score} von 16 Punkten`);
+        // window.location.href = "./dashboard.html"; // oder eine andere Seite
       } else {
         alert("Fehler: " + (result.error || "Unbekannter Fehler"));
       }
