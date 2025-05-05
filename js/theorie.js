@@ -65,6 +65,17 @@ document.addEventListener("DOMContentLoaded", async () => {
         audio.controls = true;
         audio.classList.add("theory-audio");
         card.appendChild(audio);
+      } else if (block.type === "code") {
+        const pre = document.createElement("pre");
+        const code = document.createElement("code");
+        code.textContent = block.content;
+        code.classList.add(`language-${block.language}`);
+        pre.appendChild(code);
+        pre.classList.add("theory-code");
+        card.appendChild(pre);
+      
+        // Prism neu anwenden
+        if (window.Prism) Prism.highlightElement(code);
       }
     });
 
