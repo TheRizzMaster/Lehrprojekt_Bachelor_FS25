@@ -23,7 +23,7 @@ Die Arbeit untersucht, wie selbstgesteuertes Lernen (Selflearning) im digitalen 
 - Entwicklung einer modular aufgebauten Selflearning-Webapplikation
 - Integration von interaktiven Code-Editoren zur direkten Anwendung von Gelerntem
 - KI-basierte Unterstützung für individuelles Feedback und adaptive Lernpfade
-- Experimentelle Evaluation (A/B-Test) zur Messung der Lernwirksamkeit
+- Experimentelle Evaluation zur Messung der Lernwirksamkeit
 
 ## 📈 Zielsetzung
 
